@@ -10,7 +10,7 @@ with open('AccountFile', 'r') as f:
 
 #TODO: LOGIN AS currentUser
 def login():
-    f = open("users.txt", "r")
+    f = open("AccountFile.txt", "r")
     users = f.read()
     currentUser = input('Please enter your username to login \n') #Prompt for user to input username *need to add error handling*
     #TODO: USER INPUT ERROR CHECKING
