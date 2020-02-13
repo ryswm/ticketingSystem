@@ -8,6 +8,9 @@ print('Hello, Welcome to Tix ticketing system.')
 
 currentUser = input('Please enter your username to login \n'); #Prompt for user to input username *need to add error handling*
 #TODO: USER INPUT ERROR CHECKING
+#Username cannot exceed 15 characters
+if len(currentUser) > 15:
+    print("too big")
 
 #TODO: LOGIN AS currentUser
 
