@@ -31,6 +31,22 @@ def login():
         mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
+#This method deletes users from the system
+def delete():
+    f = open("AccountFile.txt", "r+")
+    users = f.read()
+    deleteUser = input("Enter the username to delete: \n(Warning, deleted accounts cannot be recovered)\n")
+    if deleteUser in users:
+        with open("AccountFile.txt", "r") as f:
+            lines = f.readlines()
+        with open("AccountFile.txt", "w") as f:
+            for line in lines:
+                if line.strip("\n") != deleteUser:
+                    f.write(line)   
+        print("Successfully deleted the user," + deleteUser + " \n -------------------------------")
+        mainMenu()
+    elif deleteUser not in users:
+        print("User does not exist in the system.")
 
 #This method triggers the main menu and gives the user the option to create an account or login
 def mainMenu():
@@ -40,6 +56,8 @@ def mainMenu():
         createUser()
     elif selection == "login":
         login()
+    elif selection == "delete":
+        delete()
     elif selection == "quit":
        global run
        run = False
