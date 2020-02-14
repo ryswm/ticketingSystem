@@ -4,6 +4,7 @@
 
 #This method takes in a username designated by the user and writes it to the AccountFile.text
 def createUser():
+    global newUsers
     f = open("AccountFile.txt","a+")
     users = f.read()
     f.close()
@@ -15,7 +16,9 @@ def createUser():
         print("Sorry, this username is already taken.")
     elif newUser not in users:
         print("Successfully created the user, " + newUser)
-        f.write(newUser)
+        newUsers.append(newUser)
+        print(newUsers)
+        
 
 #This method verifies the users login credentials
 def login():
@@ -37,10 +40,7 @@ def login():
         #mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
-<<<<<<< HEAD
     
-=======
->>>>>>> d0c79839210ada8b2eeef574c6ea750fe1f84fdc
 #This method deletes users from the system
 def delete():
     f = open("AccountFile.txt", "r+")
@@ -94,6 +94,7 @@ def readAccounts():
 #   Main program loop
 run = True
 currentLogin = False
+newUsers = []
 while run:
     mainMenu()
 
