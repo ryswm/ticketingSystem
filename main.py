@@ -43,10 +43,16 @@ def mainMenu():
     elif selection == "quit":
        global run
        run = False
+    elif selection == "r":
+        readAccounts()
     else:
         print("\nSorry but that is not a valid option\n")
     #TODO: Add the rest of the options once the functions are made
 
+def readAccounts():
+    file = open("AccountFile.txt","r")
+    lines = file.read()
+    print(lines)
 
 #Initial start welcome & prompt for username
 #   Main program loop
