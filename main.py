@@ -35,14 +35,22 @@ def login():
 #This method triggers the main menu and gives the user the option to create an account or login
 def mainMenu():
     print("Welcome to the Tix ticketing system, please select from the following options.")
-    selection = input("1. create \n 2. login \n 3. logout \n 4. delete \n 5. sell \n 6. buy \n 7. refund \n 8. addcredit \n")
+    selection = input("1. create \n 2. login \n 3. logout \n 4. delete \n 5. sell \n 6. buy \n 7. refund \n 8. addcredit \n 9. quit\n")
     if selection == "create":
         createUser()
     elif selection == "login":
         login()
+    elif selection == "quit":
+       global run
+       run = False
     #TODO: Add the rest of the options once the functions are made
+
+
 #Initial start welcome & prompt for username
-mainMenu()
+#   Main program loop
+run = True
+while run:
+    mainMenu()
 
 
 
