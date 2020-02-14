@@ -1,12 +1,11 @@
 #!/usr/bin/env python3  #Setting interpreter
 
 #TODO: READ ACCOUNT FILE & EVENT FILE
-
+#TODO: Change account system by adding types of users instead of just usernames
 def createUser():
     f = open("AccountFile.txt","a+")
     users = f.read()
     newUser = input("Please enter your desired username: \n")
-
     if len(newUser) > 15:
         print("Username cannot exceed 15 characters.")
     elif newUser in users:
@@ -29,6 +28,22 @@ def login():
         mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
+
+def delete():
+    f = open("AccountFile.txt", "r+")
+    users = f.read()
+    deleteUser = input("Enter the username to delete: \n(Warning, deleted accounts cannot be recovered)\n")
+    if deleteUser in users:
+        with open("AccountFile.txt", "r") as f:
+            lines = f.readlines()
+        with open("AccountFile.txt", "w") as f:
+            for line in lines:
+                if line.strip("\n") != deleteUser:
+                    f.write(line)   
+        print("Successfully deleted the user," + deleteUser + " \n -------------------------------")
+        mainMenu()
+    elif deleteUser not in users:
+        print("User does not exist in the system.")
 def mainMenu():
     print("Welcome to the Tix ticketing system, please select from the following options.")
     selection = input("1. create \n 2. login \n 3. logout \n 4. delete \n 5. sell \n 6. buy \n 7. refund \n 8. addcredit \n")
@@ -36,10 +51,9 @@ def mainMenu():
         createUser()
     elif selection == "login":
         login()
+    elif selection == "delete":
+        delete()
     #TODO: Add the rest of the options once the functions are made
 #Initial start welcome & prompt for username
 mainMenu()
 
-
-
-#TODO: PROVIDE UI MENU FOR AVAILABLE USER FUNCTIONS
