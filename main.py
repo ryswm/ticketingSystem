@@ -37,7 +37,10 @@ def login():
         #mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
+<<<<<<< HEAD
     
+=======
+>>>>>>> d0c79839210ada8b2eeef574c6ea750fe1f84fdc
 #This method deletes users from the system
 def delete():
     f = open("AccountFile.txt", "r+")
