@@ -6,6 +6,7 @@
 def createUser():
     f = open("AccountFile.txt","a+")
     users = f.read()
+    f.close()
     newUser = input("Please enter your desired username: \n")
 
     if len(newUser) > 15:
@@ -18,8 +19,10 @@ def createUser():
 
 #This method verifies the users login credentials
 def login():
+    global currentLogin
     f = open("AccountFile.txt", "r")
     users = f.read()
+    f.close()
     currentUser = input('Please enter your username to login \n') #Prompt for user to input username *need to add error handling*
     #TODO: USER INPUT ERROR CHECKING
     #TODO: Read username against accountfile
@@ -31,6 +34,8 @@ def login():
         mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
+    elif currentLogin == "null":
+        print("A user is already logged in, logout before next login")
 
 #This method triggers the main menu and gives the user the option to create an account or login
 def mainMenu():
@@ -49,14 +54,23 @@ def mainMenu():
         print("\nSorry but that is not a valid option\n")
     #TODO: Add the rest of the options once the functions are made
 
-def readAccounts():
+def readAccounts(): 
     file = open("AccountFile.txt","r")
-    lines = file.read()
-    print(lines)
+    lines = file.readlines()
+    file.close()
+    users = []
+    for i in range(len(lines)):
+        line = lines[i]
+        username = line[0:14].rstrip(" ")
+        status = line[16:17]
+        credit = line[19:].lstrip("0")
+        user = [username, status, credit]
+        users.append(user)
 
 #Initial start welcome & prompt for username
 #   Main program loop
 run = True
+currentLogin = 'null'
 while run:
     mainMenu()
 
