@@ -27,15 +27,17 @@ def login():
     #TODO: USER INPUT ERROR CHECKING
     #TODO: Read username against accountfile
     #Username cannot exceed 15 characters
-    if len(currentUser) > 15:
+    if currentLogin == True:
+        print("A user is already logged in, logout before next login")
+    elif len(currentUser) > 15:
         print("Username cannot exceed 15 characters.")
     elif currentUser in users:
         print("Successfully logged in as: " + currentUser)
-        mainMenu()
+        currentLogin = True
+        #mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
-    elif currentLogin == "null":
-        print("A user is already logged in, logout before next login")
+    
 
 #This method triggers the main menu and gives the user the option to create an account or login
 def mainMenu():
@@ -70,7 +72,7 @@ def readAccounts():
 #Initial start welcome & prompt for username
 #   Main program loop
 run = True
-currentLogin = 'null'
+currentLogin = False
 while run:
     mainMenu()
 
