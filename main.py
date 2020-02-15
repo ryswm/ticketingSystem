@@ -147,6 +147,7 @@ run = True
 currentLogin = False
 newUsers = []
 
+dailyTransactions = []
 users = []
 readAccounts()  #Read in account file at start
 users = np.asarray(users)
