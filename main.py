@@ -52,6 +52,12 @@ def login():
         #mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
+
+def logout():
+    global currentLogin
+    if currentLogin == True:
+        currentLogin = False
+    print("You have successfully logged out")
     
 #This method deletes users from the system
 def delete():
@@ -78,6 +84,8 @@ def mainMenu():
         createUser()
     elif selection == "login":
         login()
+    elif selection == "logout":
+        logout()
     elif selection == "delete":
         delete()
     elif selection == "quit":
