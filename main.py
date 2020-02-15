@@ -6,6 +6,7 @@ import numpy as np
 #This method takes in a username designated by the user and writes it to the AccountFile.text
 def createUser():
     global users
+    code = "01"
     defaultcredit = "000000.00"
     newUser = input("Please enter your desired username: \n")
     if len(newUser) > 15:
@@ -14,25 +15,30 @@ def createUser():
         print("Sorry, this username is already taken.")
     elif newUser not in users:
         atype = input("Please enter the account type for this user: \n")
-
         if(atype == "AA"):
+            atype = "AA"
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
         elif(atype == "FS"):
+            type = "FS"
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
         elif(atype == "BS"):
+            type = "BS"
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
         elif(atype == "SS"):
+            type = "SS"
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
         else:
             print("Sorry that is not a valid option, user creation cancelled")
+
+
         
 
 #This method verifies the users login credentials
@@ -54,6 +60,7 @@ def login():
         print("User does not exist in the system.")
 
 def logout():
+    code = "00"
     global currentLogin
     if currentLogin == True:
         currentLogin = False
@@ -65,6 +72,7 @@ def logout():
     
 #This method deletes users from the system
 def delete():
+    code = "02"
     f = open("AccountFile.txt", "r+")
     users = f.read()
     deleteUser = input("Enter the username to delete: \n(Warning, deleted accounts cannot be recovered)\n")
@@ -81,6 +89,7 @@ def delete():
         print("User does not exist in the system.") 
 
 def addCredit():
+    code = "06"
     user = input("Enter the name of user to add credit to: \n")
     amount = int(input("Enter the amount of credit to add: \n"))
     f = open("AccountFile.txt", "r+")
