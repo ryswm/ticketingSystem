@@ -1,9 +1,6 @@
 #!/usr/bin/env python3  #Setting interpreter
-<<<<<<< HEAD
-=======
 import numpy as np
 
->>>>>>> 40689b67ab3fd776523dc3060fb0b4aa668f4862
 #TODO: READ ACCOUNT FILE & EVENT FILE
 
 #This method takes in a username designated by the user and writes it to the AccountFile.text
@@ -142,10 +139,7 @@ def readAccounts():
         user = [username, status, credit]
         users.append(user)
     
-<<<<<<< HEAD
-=======
 
->>>>>>> 40689b67ab3fd776523dc3060fb0b4aa668f4862
 #Initial start welcome & prompt for username
 
 #Global variables
