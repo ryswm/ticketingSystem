@@ -1,5 +1,4 @@
 #!/usr/bin/env python3  #Setting interpreter
-
 #TODO: READ ACCOUNT FILE & EVENT FILE
 
 #This method takes in a username designated by the user and writes it to the AccountFile.text
@@ -21,7 +20,7 @@ def createUser():
         
 
 #This method verifies the users login credentials
-def login():
+def login():    
     global currentLogin
     f = open("AccountFile.txt", "r")
     users = f.read()
@@ -56,8 +55,31 @@ def delete():
         print("Successfully deleted the user," + deleteUser + " \n -------------------------------")
         mainMenu()
     elif deleteUser not in users:
-        print("User does not exist in the system.")
+        print("User does not exist in the system.") 
 
+def addCredit():
+    user = input("Enter the name of user to add credit to: \n")
+    amount = int(input("Enter the amount of credit to add: \n"))
+    f = open("AccountFile.txt", "r+")
+    #file = f.read()
+    lines = f.readlines()
+    usernames = []
+    for i in range(len(lines)):
+        line = lines[i]
+        username = line[0:14].rstrip(" ")
+        usernames.append(username)
+        
+    if user in usernames and (amount<1000):
+        with open("AccountFile.txt", "r") as f:
+            lines = f.readlines()
+        with open("AccountFile.txt", "w") as f:
+            for line in lines:
+                if line[0:len(user)] != user:
+                    f.write(line) 
+                else:
+                    f.write(str((line[0:19])) + str((int(line[19:]) + int(amount)))) 
+    else:
+        print("Error, incorrect user and/or amount entered.")
 #This method triggers the main menu and gives the user the option to create an account or login
 def mainMenu():
     print("Welcome to the Tix ticketing system, please select from the following options.")
@@ -68,6 +90,8 @@ def mainMenu():
         login()
     elif selection == "delete":
         delete()
+    elif selection == "addcredit":
+        addCredit()
     elif selection == "quit":
        global run
        run = False
@@ -89,7 +113,7 @@ def readAccounts():
         credit = line[19:].lstrip("0")
         user = [username, status, credit]
         users.append(user)
-
+    
 #Initial start welcome & prompt for username
 #   Main program loop
 run = True

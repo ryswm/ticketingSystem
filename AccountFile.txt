@@ -1,3 +1,1 @@
-manuel
-admin           AA 001000.00
-END                         
+admin          AA 1100
