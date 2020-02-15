@@ -1,31 +1,43 @@
 #!/usr/bin/env python3  #Setting interpreter
+import numpy as np
 
 #TODO: READ ACCOUNT FILE & EVENT FILE
 
 #This method takes in a username designated by the user and writes it to the AccountFile.text
 def createUser():
-    global newUsers
-    f = open("AccountFile.txt","a+")
-    users = f.read()
-    f.close()
+    global users
+    defaultcredit = "000000.00"
     newUser = input("Please enter your desired username: \n")
-
     if len(newUser) > 15:
         print("Username cannot exceed 15 characters.")
     elif newUser in users:
         print("Sorry, this username is already taken.")
     elif newUser not in users:
-        print("Successfully created the user, " + newUser)
-        newUsers.append(newUser)
-        print(newUsers)
+        atype = input("Please enter the account type for this user: \n")
+
+        if(atype == "AA"):
+            print("Successfully created the user, " + newUser)
+            new = np.array([[newUser,atype,defaultcredit]])
+            users = np.concatenate((new,users),axis=0)
+        elif(atype == "FS"):
+            print("Successfully created the user, " + newUser)
+            new = np.array([[newUser,atype,defaultcredit]])
+            users = np.concatenate((new,users),axis=0)
+        elif(atype == "BS"):
+            print("Successfully created the user, " + newUser)
+            new = np.array([[newUser,atype,defaultcredit]])
+            users = np.concatenate((new,users),axis=0)
+        elif(atype == "SS"):
+            print("Successfully created the user, " + newUser)
+            new = np.array([[newUser,atype,defaultcredit]])
+            users = np.concatenate((new,users),axis=0)
+        else:
+            print("Sorry that is not a valid option, user creation cancelled")
         
 
 #This method verifies the users login credentials
 def login():
     global currentLogin
-    f = open("AccountFile.txt", "r")
-    users = f.read()
-    f.close()
     currentUser = input('Please enter your username to login \n') #Prompt for user to input username *need to add error handling*
     #TODO: USER INPUT ERROR CHECKING
     #TODO: Read username against accountfile
@@ -72,7 +84,7 @@ def mainMenu():
        global run
        run = False
     elif selection == "r":
-        readAccounts()
+        print(users)
     else:
         print("\nSorry but that is not a valid option\n")
     #TODO: Add the rest of the options once the functions are made
@@ -81,21 +93,28 @@ def readAccounts():
     file = open("AccountFile.txt","r")
     lines = file.readlines()
     file.close()
-    users = []
+    global users
     for i in range(len(lines)):
         line = lines[i]
         username = line[0:14].rstrip(" ")
-        status = line[16:17]
+        status = line[16:18]
         credit = line[19:].lstrip("0")
         user = [username, status, credit]
         users.append(user)
+    
 
 #Initial start welcome & prompt for username
-#   Main program loop
+
+#Global variables
 run = True
 currentLogin = False
 newUsers = []
-while run:
+
+users = []
+readAccounts()  #Read in account file at start
+users = np.asarray(users)
+
+while run:  #   Main program loop
     mainMenu()
 
 
