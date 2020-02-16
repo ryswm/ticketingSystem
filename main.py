@@ -41,8 +41,6 @@ def createUser():
             print("Sorry that is not a valid option, user creation cancelled")
 
 
-        
-
 #This method verifies the users login credentials
 def login():    
     global currentLogin
@@ -92,21 +90,6 @@ def delete():
 def addCredit():
     code = "06"
     user = input("Enter the name of user to add credit to: \n")
-    
-    #f = open("AccountFile.txt", "r+")
-    #file = f.read()
-    #lines = f.readlines()
-    #usernames = []
-    """for i in range(len(lines)):
-        line = lines[i]
-        username = line[0:14].rstrip(" ")
-        usernames.append(username)
-        
-    if user in usernames and (amount<1000):
-         
-    else:
-        print("Error, incorrect user and/or amount entered.") """
-    
     if user in users:
         amount = int(input("Enter the amount of credit to add: \n"))
         #TODO: Add check against previous addcredit this session
