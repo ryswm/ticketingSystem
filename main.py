@@ -45,7 +45,8 @@ def createUser():
         else:
             print("Sorry that is not a valid option, user creation cancelled")
 
-        if userAdded:
+        #Meant to happen during backend, will fix
+        if userAdded:   #If successfully added, change accounts file
             with open("AccountFile.txt", "r") as f:     #Read accounts file to store lines
                 lines = f.readlines()
                 f.close()
@@ -55,6 +56,9 @@ def createUser():
                     f.write(line) 
             f.close()
             userAdded = False
+        ##########################################
+
+            
 
 
 #This method verifies the users login credentials
@@ -91,13 +95,17 @@ def delete():
     code = "02"
     deleteUser = input("Enter the username to delete: \n(Warning, deleted accounts cannot be recovered)\n")
     if deleteUser in users:                     #If selected user is real account
+
+        #Meant to happen in backend, will fix
         with open("AccountFile.txt", "r") as f: #Get lines from accounts file
             lines = f.readlines()
             f.close()
-        with open("AccountFile.txt", "w") as f: #Write all users that are not selected user
+        with open("AccountFile.txt", "w") as f: #Write all users that are not selected user; Deleting user from account file
             for line in lines: 
                 if line[0:len(deleteUser)] != deleteUser: 
                     f.write(line)
+        ########################################
+
         for i in range(len(users) - 1):           #Delete user from users array
             if users[i,0] == deleteUser:
                 users = np.delete(users, i, 0)
@@ -105,6 +113,7 @@ def delete():
 
     elif deleteUser not in users:               #If selected user is not real account
         print("User does not exist in the system.") 
+
 
 def addCredit():
     code = "06"
@@ -122,7 +131,7 @@ def addCredit():
                     users[i,2] = str("{:.2f}".format(userCredit))   #Format and reassign to users array
                     print("Credit added to " + user)
 
-                    #Make changes to accounts file
+                    #Meant to happen in backend, will fix, Make changes to accounts file
                     with open("AccountFile.txt", "r") as f:     #Read accounts file to store lines
                         lines = f.readlines()
                         f.close()
@@ -134,6 +143,7 @@ def addCredit():
                                 c = '{:0>9}'.format(str("{:.2f}".format(userCredit)))
                                 f.write(str((line[0:19])) + c + "\n")
                     f.close()
+                    #################################################
                     
 
 #This method triggers the main menu and gives the user the option to create an account or login
@@ -180,15 +190,12 @@ def readAccounts():
 run = True
 currentLogin = False
 newUsers = []
-
 dailyTransactions = []
 users = []
+
 readAccounts()  #Read in account file at start
 users = np.asarray(users)
 
 while run:  #   Main program loop
     mainMenu()
 
-
-
-#TODO: PROVIDE UI MENU FOR AVAILABLE USER FUNCTIONS
