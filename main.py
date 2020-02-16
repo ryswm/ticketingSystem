@@ -9,8 +9,9 @@ def createUser():
     global users
     code = "01"
     defaultcredit = "000000.00"
-    newUser = input("Please enter your desired username: \n")
+    userAdded = False
 
+    newUser = input("Please enter your desired username: \n")
     if len(newUser) > 15:
         print("Username cannot exceed 15 characters.")
     elif newUser in users:
@@ -22,23 +23,38 @@ def createUser():
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
+            userAdded = True
         elif(atype == "FS"):
             type = "FS"
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
+            userAdded = True
         elif(atype == "BS"):
             type = "BS"
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
+            userAdded = True
         elif(atype == "SS"):
             type = "SS"
             print("Successfully created the user, " + newUser)
             new = np.array([[newUser,atype,defaultcredit]])
             users = np.concatenate((new,users),axis=0)
+            userAdded = True
         else:
             print("Sorry that is not a valid option, user creation cancelled")
+
+        if userAdded:
+            with open("AccountFile.txt", "r") as f:     #Read accounts file to store lines
+                lines = f.readlines()
+                f.close()
+            with open("AccountFile.txt", "w") as f:     #Write lines with changes to file
+                f.write(newUser.ljust(15) +  " " + atype + " " + defaultcredit + "\n")
+                for line in lines:
+                    f.write(line) 
+            f.close()
+            userAdded = False
 
 
 #This method verifies the users login credentials
@@ -71,44 +87,50 @@ def logout():
     
 #This method deletes users from the system
 def delete():
+    global users
     code = "02"
-    f = open("AccountFile.txt", "r+")
-    users = f.read()
     deleteUser = input("Enter the username to delete: \n(Warning, deleted accounts cannot be recovered)\n")
-    if deleteUser in users:
-        with open("AccountFile.txt", "r") as f:
+    if deleteUser in users:                     #If selected user is real account
+        with open("AccountFile.txt", "r") as f: #Get lines from accounts file
             lines = f.readlines()
-        with open("AccountFile.txt", "w") as f:
-            for line in lines:
-                if line.strip("\n") != deleteUser:
-                    f.write(line)   
+            f.close()
+        with open("AccountFile.txt", "w") as f: #Write all users that are not selected user
+            for line in lines: 
+                if line[0:len(deleteUser)] != deleteUser: 
+                    f.write(line)
+        for i in range(len(users) - 1):           #Delete user from users array
+            if users[i,0] == deleteUser:
+                users = np.delete(users, i, 0)
         print("Successfully deleted the user," + deleteUser + " \n -------------------------------")
-        mainMenu()
-    elif deleteUser not in users:
+
+    elif deleteUser not in users:               #If selected user is not real account
         print("User does not exist in the system.") 
 
 def addCredit():
     code = "06"
     user = input("Enter the name of user to add credit to: \n")
-    if user in users:
+    if user in users: #Check if selected user is a real account
         amount = int(input("Enter the amount of credit to add: \n"))
+
         #TODO: Add check against previous addcredit this session
-        if amount <= 1000:
-            for i in range(len(users[:,:])):
-                if users[i,0] == user:
-                    
-                    userCredit = float((users[i,2]))
+
+        if amount <= 1000: #Check if desired credit ammount is within daily add limit
+            for i in range(len(users[:,:])): #Iterate through usernames
+                if users[i,0] == user: 
+                    userCredit = float((users[i,2])) #Credit stored as string, must convert to manipulate
                     userCredit += amount
-                    users[i,2] = str("{:.2f}".format(userCredit))
+                    users[i,2] = str("{:.2f}".format(userCredit))   #Format and reassign to users array
                     print("Credit added to " + user)
-                    with open("AccountFile.txt", "r") as f:
+
+                    #Make changes to accounts file
+                    with open("AccountFile.txt", "r") as f:     #Read accounts file to store lines
                         lines = f.readlines()
                         f.close()
-                    with open("AccountFile.txt", "w") as f:
+                    with open("AccountFile.txt", "w") as f:     #Write lines with changes to file
                         for line in lines:
-                            if line[0:len(user)] != user:
+                            if line[0:len(user)] != user:   #Write unchanged lines
                                 f.write(line) 
-                            else:
+                            else:                       #Write changed line
                                 c = '{:0>9}'.format(str("{:.2f}".format(userCredit)))
                                 f.write(str((line[0:19])) + c + "\n")
                     f.close()
@@ -142,6 +164,7 @@ def readAccounts():
     lines = file.readlines()
     file.close()
     global users
+    print(len(lines))
     for i in range(len(lines)):
         line = lines[i]
         username = line[0:14].rstrip(" ")
