@@ -1,7 +1,8 @@
 #!/usr/bin/env python3  #Setting interpreter
 import numpy as np
+from decimal import *
 
-#TODO: READ ACCOUNT FILE & EVENT FILE
+#TODO: EVENT FILE
 
 #This method takes in a username designated by the user and writes it to the AccountFile.text
 def createUser():
@@ -9,6 +10,7 @@ def createUser():
     code = "01"
     defaultcredit = "000000.00"
     newUser = input("Please enter your desired username: \n")
+
     if len(newUser) > 15:
         print("Username cannot exceed 15 characters.")
     elif newUser in users:
@@ -44,10 +46,9 @@ def createUser():
 #This method verifies the users login credentials
 def login():    
     global currentLogin
+    global users
     currentUser = input('Please enter your username to login \n') #Prompt for user to input username *need to add error handling*
-    #TODO: USER INPUT ERROR CHECKING
-    #TODO: Read username against accountfile
-    #Username cannot exceed 15 characters
+  
     if currentLogin == True:
         print("A user is already logged in, logout before next login")
     elif len(currentUser) > 15:
@@ -91,27 +92,45 @@ def delete():
 def addCredit():
     code = "06"
     user = input("Enter the name of user to add credit to: \n")
-    amount = int(input("Enter the amount of credit to add: \n"))
-    f = open("AccountFile.txt", "r+")
+    
+    #f = open("AccountFile.txt", "r+")
     #file = f.read()
-    lines = f.readlines()
-    usernames = []
-    for i in range(len(lines)):
+    #lines = f.readlines()
+    #usernames = []
+    """for i in range(len(lines)):
         line = lines[i]
         username = line[0:14].rstrip(" ")
         usernames.append(username)
         
     if user in usernames and (amount<1000):
-        with open("AccountFile.txt", "r") as f:
-            lines = f.readlines()
-        with open("AccountFile.txt", "w") as f:
-            for line in lines:
-                if line[0:len(user)] != user:
-                    f.write(line) 
-                else:
-                    f.write(str((line[0:19])) + str((int(line[19:]) + int(amount)))) 
+         
     else:
-        print("Error, incorrect user and/or amount entered.")
+        print("Error, incorrect user and/or amount entered.") """
+    
+    if user in users:
+        amount = int(input("Enter the amount of credit to add: \n"))
+        #TODO: Add check against previous addcredit this session
+        if amount <= 1000:
+            for i in range(len(users[:,:])):
+                if users[i,0] == user:
+                    
+                    userCredit = float((users[i,2]))
+                    userCredit += amount
+                    users[i,2] = str("{:.2f}".format(userCredit))
+                    print("Credit added to " + user)
+                    with open("AccountFile.txt", "r") as f:
+                        lines = f.readlines()
+                        f.close()
+                    with open("AccountFile.txt", "w") as f:
+                        for line in lines:
+                            if line[0:len(user)] != user:
+                                f.write(line) 
+                            else:
+                                c = '{:0>9}'.format(str("{:.2f}".format(userCredit)))
+                                f.write(str((line[0:19])) + c + "\n")
+                    f.close()
+                    
+
 #This method triggers the main menu and gives the user the option to create an account or login
 def mainMenu():
     print("Welcome to the Tix ticketing system, please enter one of the following options.")
@@ -144,7 +163,7 @@ def readAccounts():
         line = lines[i]
         username = line[0:14].rstrip(" ")
         status = line[16:18]
-        credit = line[19:].lstrip("0")
+        credit = line[19:28].lstrip("0")
         user = [username, status, credit]
         users.append(user)
     
