@@ -7,7 +7,9 @@ from decimal import *
 #This method takes in a username designated by the user and writes it to the AccountFile.text
 def createUser():
     global users
-    code = "01"
+    global dailyTransactions
+
+    code = "01 "
     defaultcredit = "000000.00"
     userAdded = False
 
@@ -44,21 +46,11 @@ def createUser():
             userAdded = True
         else:
             print("Sorry that is not a valid option, user creation cancelled")
-
-        #Meant to happen during backend, will fix
-        if userAdded:   #If successfully added, change accounts file
-            with open("AccountFile.txt", "r") as f:     #Read accounts file to store lines
-                lines = f.readlines()
-                f.close()
-            with open("AccountFile.txt", "w") as f:     #Write lines with changes to file
-                f.write(newUser.ljust(15) +  " " + atype + " " + defaultcredit + "\n")
-                for line in lines:
-                    f.write(line) 
-            f.close()
+        
+        if userAdded:   #If successfully added, add transaction to daily transaction list
+            transaction = str(code + newUser + " " + atype + " " + defaultcredit + "\n")
+            dailyTransactions = np.append(dailyTransactions,transaction)
             userAdded = False
-        ##########################################
-
-            
 
 
 #This method verifies the users login credentials
@@ -74,7 +66,6 @@ def login():
     elif currentUser in users:
         print("Successfully logged in as: " + currentUser)
         currentLogin = True
-        #mainMenu()
     elif currentUser not in users:
         print("User does not exist in the system.")
 
@@ -87,36 +78,39 @@ def logout():
     f = open("Transactions.txt", "r")
     transactions = f.readlines()
     print(transactions)
+    #TODO: End frontend session
+    #TODO: Have backend process all sessions transactions
+    #TODO: Read in new account file and event file in preperation for next login
 
     
 #This method deletes users from the system
 def delete():
     global users
-    code = "02"
+    global dailyTransactions
+    code = "02 "
+
     deleteUser = input("Enter the username to delete: \n(Warning, deleted accounts cannot be recovered)\n")
     if deleteUser in users:                     #If selected user is real account
-
-        #Meant to happen in backend, will fix
-        with open("AccountFile.txt", "r") as f: #Get lines from accounts file
-            lines = f.readlines()
-            f.close()
-        with open("AccountFile.txt", "w") as f: #Write all users that are not selected user; Deleting user from account file
-            for line in lines: 
-                if line[0:len(deleteUser)] != deleteUser: 
-                    f.write(line)
-        ########################################
-
-        for i in range(len(users) - 1):           #Delete user from users array
+        for i in range(len(users) - 1):           
             if users[i,0] == deleteUser:
-                users = np.delete(users, i, 0)
-        print("Successfully deleted the user," + deleteUser + " \n -------------------------------")
 
+                users = np.delete(users, i, 0) #Delete user from users array
+
+                credit = float(users[i,2]) #Format users credit for transaction line
+                credit = '{:0>9}'.format(str("{:.2f}".format(credit)))
+
+                transaction = str(code + deleteUser.ljust(15) + " " + users[i,1] + " " + credit) #Add transaction to daily transactions list
+                dailyTransactions = np.append(dailyTransactions,transaction)
+        print("Successfully deleted the user," + deleteUser + " \n -------------------------------")
     elif deleteUser not in users:               #If selected user is not real account
         print("User does not exist in the system.") 
 
 
 def addCredit():
-    code = "06"
+    code = "06 "
+    global users
+    global dailyTransactions
+
     user = input("Enter the name of user to add credit to: \n")
     if user in users: #Check if selected user is a real account
         amount = int(input("Enter the amount of credit to add: \n"))
@@ -126,24 +120,13 @@ def addCredit():
         if amount <= 1000: #Check if desired credit ammount is within daily add limit
             for i in range(len(users[:,:])): #Iterate through usernames
                 if users[i,0] == user: 
-                    userCredit = float((users[i,2])) #Credit stored as string, must convert to manipulate
+                    userCredit = float(users[i,2]) #Credit stored as string, must convert to manipulate
                     userCredit += amount
                     users[i,2] = str("{:.2f}".format(userCredit))   #Format and reassign to users array
                     print("Credit added to " + user)
 
-                    #Meant to happen in backend, will fix, Make changes to accounts file
-                    with open("AccountFile.txt", "r") as f:     #Read accounts file to store lines
-                        lines = f.readlines()
-                        f.close()
-                    with open("AccountFile.txt", "w") as f:     #Write lines with changes to file
-                        for line in lines:
-                            if line[0:len(user)] != user:   #Write unchanged lines
-                                f.write(line) 
-                            else:                       #Write changed line
-                                c = '{:0>9}'.format(str("{:.2f}".format(userCredit)))
-                                f.write(str((line[0:19])) + c + "\n")
-                    f.close()
-                    #################################################
+                    transaction = str(code + user.ljust(15) + " " + users[i,1] + " " + '{:0>9}'.format(users[i,2]))
+                    dailyTransactions = np.append(dailyTransactions, transaction)
                     
 
 #This method triggers the main menu and gives the user the option to create an account or login
@@ -165,6 +148,7 @@ def mainMenu():
        run = False
     elif selection == "r":
         print(users)
+        print(dailyTransactions)
     else:
         print("\nSorry but that is not a valid option\n")
     #TODO: Add the rest of the options once the functions are made
