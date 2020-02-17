@@ -129,9 +129,9 @@ def addCredit():
                     dailyTransactions = np.append(dailyTransactions, transaction)
                     
 def refund():
+    code = "05 "
     global users
     global dailyTransactions
-    code = "05"
     buyer = input("Please enter buyer's account name. \n")
     if buyer in users:
         for i in range(len(users) - 1):
@@ -140,8 +140,13 @@ def refund():
                 refund = int(input("Please enter refund amount. \n"))
                 if(refund <= 999999):
                     buyerCredit += refund
-                    users[i, 2] = str("{:.2f}".format(buyerCredit))   #Format and reassign to users array
-                    print(users[i, 2])
+                    users[i, 2] = str("{:.2f}".format(buyerCredit))
+                    print(buyer + " has been refunded")
+                    print(buyer + " now has " + users[i, 2] + " in their account")
+
+                    transaction = str(code + buyer.ljust(15) + " " + users[i,1] + " " + '{:0>9}'.format(users[i,2]))
+                    dailyTransactions = np.append(dailyTransactions, transaction)
+
                     seller = input("Please enter seller's account name. \n")
             #TODO: fix subtraction bounds error
                     if seller in users:
@@ -151,8 +156,14 @@ def refund():
                                 refund = int(input("Please enter refund amount. \n"))
                                 if(refund <= 999999):
                                     sellerCredit -= refund
-                                    users[i, 2] = str("{:.2f}".format(sellerCredit))  # Format and reassign to users array
-                                    print(users[i, 2])
+                                    users[i, 2] = str("{:.2f}".format(sellerCredit))
+                                    print(seller + " has been debited")
+                                    print(seller + " now has " + users[i, 2] + " in their account")
+
+                                    transaction = str(
+                                        code + seller.ljust(15) + " " + users[i, 1] + " " + '{:0>9}'.format(users[i, 2]))
+                                    dailyTransactions = np.append(dailyTransactions, transaction)
+
                                 else:
                                     print("Refund exceeds the maximum amount")
                     else:
