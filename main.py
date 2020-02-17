@@ -128,6 +128,24 @@ def addCredit():
                     transaction = str(code + user.ljust(15) + " " + users[i,1] + " " + '{:0>9}'.format(users[i,2]))
                     dailyTransactions = np.append(dailyTransactions, transaction)
                     
+def refund():
+    global users
+    global dailyTransactions
+    code = "05"
+    buyer = input("Please enter buyer's account name. \n")
+    if buyer in users:
+        seller = input("Please enter seller's account name. \n")
+        if seller in users:
+            credit = input("Please enter credit amount. \n")
+        else:
+            print("There is no seller by that name! \n")
+    else:
+        print("There is no buyer by that name! \n")
+
+            #TODO: subtract credit from sellers account
+            #TODO: add credit to the buyers account
+            #TODO: update daily transactions file
+
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
@@ -170,7 +188,7 @@ def readAccounts():
         user = [username, status, credit]
         users.append(user)
 
-<<<<<<< HEAD
+
 def readEvents():
     file = open("eventFile.txt", "r")
     lines = file.readlines()
@@ -185,7 +203,7 @@ def readEvents():
         price = line[39:45].lstrip("0")
         event = [title, seller, amount, price]
         events.append(event)
-=======
+
 def refund():
     global users
     global dailyTransactions
@@ -204,8 +222,7 @@ def refund():
             #TODO: add credit to the buyers account
             #TODO: update daily transactions file
 
->>>>>>> f1afce7d57a01ecaa12991074ca4bf5f9f04ad9b
-    
+
 
 #Initial start welcome & prompt for username
 
