@@ -145,6 +145,7 @@ def refund():
                     if seller in users:
                         for i in range(len(users) - 1):
                             if users[i,0] == seller:
+                                credit = float(str("{:.2f}".format(refund)))
                                 buyerCredit += refund
                                 users[i, 2] = str("{:.2f}".format(buyerCredit))
                                 print(buyer + " has been refunded")
@@ -156,7 +157,8 @@ def refund():
                                 print(seller + " has been debited")
                                 print(seller + " now has " + users[i, 2] + " in their account")
 
-                                transaction = str( code + seller.ljust(15) + " " + users[i, 1] + " " + '{:0>9}'.format(users[i, 2]))
+                                transaction = str(code + buyer.ljust(15) + seller.ljust(15) + '{:0>9}'.format(credit))
+                                print(transaction)
                                 dailyTransactions = np.append(dailyTransactions, transaction)
 
                             else:
