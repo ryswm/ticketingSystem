@@ -148,6 +148,7 @@ def mainMenu():
        run = False
     elif selection == "r":
         print(users)
+        print(events)
         print(dailyTransactions)
     else:
         print("\nSorry but that is not a valid option\n")
@@ -158,14 +159,29 @@ def readAccounts():
     lines = file.readlines()
     file.close()
     global users
-    print(len(lines))
+
     for i in range(len(lines)):
         line = lines[i]
-        username = line[0:14].rstrip(" ")
+        username = line[0:15].rstrip(" ")
         status = line[16:18]
         credit = line[19:28].lstrip("0")
         user = [username, status, credit]
         users.append(user)
+
+def readEvents():
+    file = open("eventFile.txt", "r")
+    lines = file.readlines()
+    file.close()
+
+    global events
+    for i in range(len(lines)):
+        line = lines[i]
+        title = line[0:18].rstrip(" ")
+        seller = line[19:34].rstrip(" ")
+        amount = line[35:38].lstrip("0")
+        price = line[39:45].lstrip("0")
+        event = [title, seller, amount, price]
+        events.append(event)
     
 
 #Initial start welcome & prompt for username
@@ -176,9 +192,13 @@ currentLogin = False
 newUsers = []
 dailyTransactions = []
 users = []
+events = []
 
 readAccounts()  #Read in account file at start
 users = np.asarray(users)
+
+readEvents()
+events = np.asarray(events)
 
 while run:  #   Main program loop
     mainMenu()
