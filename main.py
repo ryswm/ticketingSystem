@@ -178,8 +178,10 @@ def refund():
         seller = input("Please enter seller's account name. \n")
         if seller in users:
             credit = input("Please enter credit amount. \n")
+        else:
+            print("There is no seller by that name! \n")
     else:
-        print("There is no buyer by that name!")
+        print("There is no buyer by that name! \n")
 
             #TODO: subtract credit from sellers account
             #TODO: add credit to the buyers account
