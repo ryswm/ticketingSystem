@@ -213,8 +213,7 @@ def refund():
         for i in range(len(users) - 1):
             if users[i,0] == buyer:
                 refund = input("Please enter refund amount. \n")
-                buyercredit = users[i,2]
-                users[i, 2] = buyercredit + refund
+                users[i, 2] += refund
                 print(users[i, 2])
             seller = input("Please enter seller's account name. \n")
             #TODO: fix subtraction bounds error
