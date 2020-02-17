@@ -145,7 +145,7 @@ def refund():
                     if seller in users:
                         for i in range(len(users) - 1):
                             if users[i,0] == seller:
-                                credit = float(str("{:.2f}".format(refund)))
+                                credit = (str("{:.2f}".format(refund)))
                                 buyerCredit += refund
                                 users[i, 2] = str("{:.2f}".format(buyerCredit))
                                 print(buyer + " has been refunded")
