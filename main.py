@@ -129,7 +129,7 @@ def addCredit():
                     dailyTransactions = np.append(dailyTransactions, transaction)
                     
 
-#This method triggers the main menu and gives the user the option to create an account or login
+#Triggers the main menu UI which displays the user options
 def mainMenu():
     print("Welcome to the Tix ticketing system, please enter one of the following options.")
     selection = input(" 1. create \n 2. login \n 3. logout \n 4. delete \n 5. sell \n 6. buy \n 7. refund \n 8. addcredit \n 9. quit\n")
