@@ -143,6 +143,8 @@ def mainMenu():
         delete()
     elif selection == "addcredit":
         addCredit()
+    elif selection == "refund":
+        refund()
     elif selection == "quit":
        global run
        run = False
@@ -166,6 +168,23 @@ def readAccounts():
         credit = line[19:28].lstrip("0")
         user = [username, status, credit]
         users.append(user)
+
+def refund():
+    global users
+    global dailyTransactions
+    code = "05"
+    buyer = input("Please enter buyer's account name. \n")
+    if buyer in users:
+        seller = input("Please enter seller's account name. \n")
+        if seller in users:
+            credit = input("Please enter credit amount. \n")
+    else:
+        print("There is no buyer by that name!")
+
+            #TODO: subtract credit from sellers account
+            #TODO: add credit to the buyers account
+            #TODO: update daily transactions file
+
     
 
 #Initial start welcome & prompt for username
