@@ -136,17 +136,24 @@ def refund():
     if buyer in users:
         for i in range(len(users) - 1):
             if users[i,0] == buyer:
-                refund = input("Please enter refund amount. \n")
-                users[i, 2] += refund
-                print(users[i, 2])
-            seller = input("Please enter seller's account name. \n")
+                buyerCredit = float(users[i,2])
+                refund = int(input("Please enter refund amount. \n"))
+                if(refund <= 1000):
+                    buyerCredit += refund
+                    users[i, 2] = str("{:.2f}".format(buyerCredit))   #Format and reassign to users array
+                    print(users[i, 2])
+                    seller = input("Please enter seller's account name. \n")
             #TODO: fix subtraction bounds error
-            if seller in users:
-                for i in range(len(users) - 1):
-                    if users[i,0] == seller:
-                        refund = input("Please enter refund amount. \n")
-                        users[i,2] -= refund
-                        print(users[i, 2])
+                    if seller in users:
+                        for i in range(len(users) - 1):
+                            if users[i,0] == seller:
+                                sellerCredit = float(users[i,2])
+                                refund = int(input("Please enter refund amount. \n"))
+                                sellerCredit -= refund
+                                users[i, 2] = str("{:.2f}".format(sellerCredit))  # Format and reassign to users array
+                                print(users[i, 2])
+                else:
+                    print("Refund exceeds daily limit")
 
 
 #Triggers the main menu UI which displays the user options
