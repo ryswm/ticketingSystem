@@ -129,7 +129,7 @@ def addCredit():
                     dailyTransactions = np.append(dailyTransactions, transaction)
                     
 
-#This method triggers the main menu and gives the user the option to create an account or login
+#Triggers the main menu UI which displays the user options
 def mainMenu():
     print("Welcome to the Tix ticketing system, please enter one of the following options.")
     selection = input(" 1. create \n 2. login \n 3. logout \n 4. delete \n 5. sell \n 6. buy \n 7. refund \n 8. addcredit \n 9. quit\n")
@@ -143,6 +143,8 @@ def mainMenu():
         delete()
     elif selection == "addcredit":
         addCredit()
+    elif selection == "refund":
+        refund()
     elif selection == "quit":
        global run
        run = False
@@ -168,6 +170,7 @@ def readAccounts():
         user = [username, status, credit]
         users.append(user)
 
+<<<<<<< HEAD
 def readEvents():
     file = open("eventFile.txt", "r")
     lines = file.readlines()
@@ -182,6 +185,26 @@ def readEvents():
         price = line[39:45].lstrip("0")
         event = [title, seller, amount, price]
         events.append(event)
+=======
+def refund():
+    global users
+    global dailyTransactions
+    code = "05"
+    buyer = input("Please enter buyer's account name. \n")
+    if buyer in users:
+        seller = input("Please enter seller's account name. \n")
+        if seller in users:
+            credit = input("Please enter credit amount. \n")
+        else:
+            print("There is no seller by that name! \n")
+    else:
+        print("There is no buyer by that name! \n")
+
+            #TODO: subtract credit from sellers account
+            #TODO: add credit to the buyers account
+            #TODO: update daily transactions file
+
+>>>>>>> f1afce7d57a01ecaa12991074ca4bf5f9f04ad9b
     
 
 #Initial start welcome & prompt for username
