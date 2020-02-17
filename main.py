@@ -128,6 +128,24 @@ def addCredit():
                     transaction = str(code + user.ljust(15) + " " + users[i,1] + " " + '{:0>9}'.format(users[i,2]))
                     dailyTransactions = np.append(dailyTransactions, transaction)
                     
+def refund():
+    global users
+    global dailyTransactions
+    code = "05"
+    buyer = input("Please enter buyer's account name. \n")
+    if buyer in users:
+        seller = input("Please enter seller's account name. \n")
+        if seller in users:
+            credit = input("Please enter credit amount. \n")
+        else:
+            print("There is no seller by that name! \n")
+    else:
+        print("There is no buyer by that name! \n")
+
+            #TODO: subtract credit from sellers account
+            #TODO: add credit to the buyers account
+            #TODO: update daily transactions file
+
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
@@ -150,6 +168,7 @@ def mainMenu():
        run = False
     elif selection == "r":
         print(users)
+        print(events)
         print(dailyTransactions)
     else:
         print("\nSorry but that is not a valid option\n")
@@ -160,14 +179,30 @@ def readAccounts():
     lines = file.readlines()
     file.close()
     global users
-    print(len(lines))
+
     for i in range(len(lines)):
         line = lines[i]
-        username = line[0:14].rstrip(" ")
+        username = line[0:15].rstrip(" ")
         status = line[16:18]
         credit = line[19:28].lstrip("0")
         user = [username, status, credit]
         users.append(user)
+
+
+def readEvents():
+    file = open("eventFile.txt", "r")
+    lines = file.readlines()
+    file.close()
+
+    global events
+    for i in range(len(lines)):
+        line = lines[i]
+        title = line[0:18].rstrip(" ")
+        seller = line[19:34].rstrip(" ")
+        amount = line[35:38].lstrip("0")
+        price = line[39:45].lstrip("0")
+        event = [title, seller, amount, price]
+        events.append(event)
 
 def refund():
     global users
@@ -192,7 +227,7 @@ def refund():
                         print(users[i, 2])
 
 
-    
+
 
 #Initial start welcome & prompt for username
 
@@ -202,9 +237,13 @@ currentLogin = False
 newUsers = []
 dailyTransactions = []
 users = []
+events = []
 
 readAccounts()  #Read in account file at start
 users = np.asarray(users)
+
+readEvents()
+events = np.asarray(events)
 
 while run:  #   Main program loop
     mainMenu()
