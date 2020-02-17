@@ -134,17 +134,19 @@ def refund():
     code = "05"
     buyer = input("Please enter buyer's account name. \n")
     if buyer in users:
-        seller = input("Please enter seller's account name. \n")
-        if seller in users:
-            credit = input("Please enter credit amount. \n")
-        else:
-            print("There is no seller by that name! \n")
-    else:
-        print("There is no buyer by that name! \n")
-
-            #TODO: subtract credit from sellers account
-            #TODO: add credit to the buyers account
-            #TODO: update daily transactions file
+        for i in range(len(users) - 1):
+            if users[i,0] == buyer:
+                refund = input("Please enter refund amount. \n")
+                users[i, 2] += refund
+                print(users[i, 2])
+            seller = input("Please enter seller's account name. \n")
+            #TODO: fix subtraction bounds error
+            if seller in users:
+                for i in range(len(users) - 1):
+                    if users[i,0] == seller:
+                        refund = input("Please enter refund amount. \n")
+                        users[i,2] -= refund
+                        print(users[i, 2])
 
 
 #Triggers the main menu UI which displays the user options
@@ -204,26 +206,7 @@ def readEvents():
         event = [title, seller, amount, price]
         events.append(event)
 
-def refund():
-    global users
-    global dailyTransactions
-    code = "05"
-    buyer = input("Please enter buyer's account name. \n")
-    if buyer in users:
-        for i in range(len(users) - 1):
-            if users[i,0] == buyer:
-                refund = input("Please enter refund amount. \n")
-                users[i, 2] += refund
-                print(users[i, 2])
-            seller = input("Please enter seller's account name. \n")
-            #TODO: fix subtraction bounds error
-            if seller in users:
-                for i in range(len(users) - 1):
-                    if users[i,0] == seller:
-                        refund = input("Please enter refund amount. \n")
-                        sellerCredit = users[i,2]
-                        users[i,2] = sellerCredit - refund
-                        print(users[i, 2])
+
 
 
 
