@@ -138,7 +138,7 @@ def refund():
             if users[i,0] == buyer:
                 buyerCredit = float(users[i,2])
                 refund = int(input("Please enter refund amount. \n"))
-                if(refund <= 1000):
+                if(refund <= 999999):
                     buyerCredit += refund
                     users[i, 2] = str("{:.2f}".format(buyerCredit))   #Format and reassign to users array
                     print(users[i, 2])
@@ -149,12 +149,18 @@ def refund():
                             if users[i,0] == seller:
                                 sellerCredit = float(users[i,2])
                                 refund = int(input("Please enter refund amount. \n"))
-                                sellerCredit -= refund
-                                users[i, 2] = str("{:.2f}".format(sellerCredit))  # Format and reassign to users array
-                                print(users[i, 2])
+                                if(refund <= 999999):
+                                    sellerCredit -= refund
+                                    users[i, 2] = str("{:.2f}".format(sellerCredit))  # Format and reassign to users array
+                                    print(users[i, 2])
+                                else:
+                                    print("Refund exceeds the maximum amount")
+                    else:
+                        print("Seller does not exist!")
                 else:
-                    print("Refund exceeds daily limit")
-
+                    print("Refund exceeds the maximum amount")
+    else:
+        print("Buyer does not exist!")
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
