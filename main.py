@@ -48,7 +48,7 @@ def createUser():
             print("Sorry that is not a valid option, user creation cancelled")
         
         if userAdded:   #If successfully added, add transaction to daily transaction list
-            transaction = str(code + newUser + " " + atype + " " + defaultcredit + "\n")
+            transaction = str(code + newUser + " " + atype + " " + defaultcredit)
             dailyTransactions = np.append(dailyTransactions,transaction)
             userAdded = False
 
@@ -226,6 +226,15 @@ def readEvents():
         price = line[39:45].lstrip("0")
         event = [title, seller, amount, price]
         events.append(event)
+
+def writeEvents():
+    global dailyTransactions
+    endLine = str("00 " + )
+    f = open("eventFile.txt", "w")
+    for i in range(len(dailyTransactions) - 1):
+        f.write(dailyTransactions[i] + "\n")
+    f.write()
+    f.close()
 
 
 
