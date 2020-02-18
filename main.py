@@ -57,8 +57,9 @@ def createUser():
 def login():    
     global currentLogin
     global users
-    currentUser = input('Please enter your username to login \n') #Prompt for user to input username *need to add error handling*
     global currentUserInfo
+
+    currentUser = input('Please enter your username to login \n') #Prompt for user to input username *need to add error handling*
     if currentLogin == True:
         print("A user is already logged in, logout before next login")
     elif len(currentUser) > 15:
@@ -67,11 +68,11 @@ def login():
         print("Successfully logged in as: " + currentUser)
         currentLogin = True
 
-        matchers = [currentUser]
         matching = [s for s in users if currentUser in s]
         currentUserInfo = {
             "username":currentUser,
             "accountType": matching[0][1],
+            "credit": matching[0][2]
             }
     elif currentUser not in users:
         print("User does not exist in the system.")
@@ -82,9 +83,7 @@ def logout():
     if currentLogin == True:
         currentLogin = False
     print("You have successfully logged out")
-    f = open("Transactions.txt", "r")
-    transactions = f.readlines()
-    print(transactions)
+    writeTransactions()
     #TODO: End frontend session
     #TODO: Have backend process all sessions transactions
     #TODO: Read in new account file and event file in preperation for next login
@@ -194,6 +193,8 @@ def sell():
 
 def buy():
     code = "04 "
+
+
 #Triggers the main menu UI which displays the user options
 def mainMenu():
     print("Welcome to the Tix ticketing system, please enter one of the following options.")
@@ -218,12 +219,15 @@ def mainMenu():
     elif selection == "r":
         print(users)
         print(events)
-        print(dailyTransactions)
+        print(dailyTransactions[0])
+    elif selection == "w":
+        writeTransactions()
     else:
         print("\nSorry but that is not a valid option\n")
     #TODO: Add the rest of the options once the functions are made
 
-def readAccounts(): 
+
+def readAccounts():         #Read current account file; triggered at startup and after backend is finished changes
     file = open("AccountFile.txt","r")
     lines = file.readlines()
     file.close()
@@ -238,7 +242,7 @@ def readAccounts():
         users.append(user)
 
 
-def readEvents():
+def readEvents():               #Read current events file; triggered at startup and after backend is finished changes
     file = open("eventFile.txt", "r")
     lines = file.readlines()
     file.close()
@@ -253,34 +257,38 @@ def readEvents():
         event = [title, seller, amount, price]
         events.append(event)
 
-def writeEvents():
+
+def writeTransactions():        #Write daily transactions; triggered upon logout function
+    global currentUserInfo
     global dailyTransactions
-    endLine = str("00 " + )
-    f = open("eventFile.txt", "w")
-    for i in range(len(dailyTransactions) - 1):
+
+    user = currentUserInfo["username"]
+    type = currentUserInfo["accountType"]
+    credit = currentUserInfo["credit"]
+    endLine = str("00 " + user.ljust(15) + " " + type + " " + credit)
+    f = open("transactionFile.txt", "w")
+    for i in range(len(dailyTransactions)):
         f.write(dailyTransactions[i] + "\n")
-    f.write()
+    f.write(endLine)
     f.close()
 
 
-
-
-
-
-#Initial start welcome & prompt for username
-
 #Global variables
-run = True
-currentLogin = False
-newUsers = []
-dailyTransactions = []
-users = []
-events = []
+run = True                      #Ensures main program keeps running
+currentLogin = False            #Signifies if user is logged in
+dailyTransactions = []          #List of transactions during session
+users = []                      #Matrix of current sessions user info
+events = []                     #Matrix of current sessions events
+currentUserInfo = {             #Dictionary of logged in user details
+    "username":"",
+    "accountType":"",
+    "credit":""
+}
 
 readAccounts()  #Read in account file at start
 users = np.asarray(users)
 
-readEvents()
+readEvents()    #Read in events file at start
 events = np.asarray(events)
 
 while run:  #   Main program loop
