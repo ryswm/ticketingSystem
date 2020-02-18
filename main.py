@@ -58,7 +58,7 @@ def login():
     global currentLogin
     global users
     currentUser = input('Please enter your username to login \n') #Prompt for user to input username *need to add error handling*
-  
+    global currentUserInfo
     if currentLogin == True:
         print("A user is already logged in, logout before next login")
     elif len(currentUser) > 15:
@@ -66,6 +66,13 @@ def login():
     elif currentUser in users:
         print("Successfully logged in as: " + currentUser)
         currentLogin = True
+
+        matchers = [currentUser]
+        matching = [s for s in users if currentUser in s]
+        currentUserInfo = {
+            "username":currentUser,
+            "accountType": matching[0][1],
+            }
     elif currentUser not in users:
         print("User does not exist in the system.")
 
@@ -170,6 +177,23 @@ def refund():
     else:
         print("Buyer does not exist!")
 
+def sell():
+    code = "03 "
+    global currentLogin
+    global currentUserInfo
+    global dailyTransactions
+    if currentLogin == True and currentUserInfo["accountType"] == "AA":
+        eventName = input("Enter the name of the event: ")
+        salePrice = input("Enter the sale price of each ticket: ")
+        ticketsAmount = input("Please enter the amount of tickets: ")
+        
+        transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(13) + ticketsAmount + " " + salePrice)
+        dailyTransactions = np.append(dailyTransactions, transaction)
+    else:
+        print("Sorry, you must be logged in to sell tickets.")
+
+def buy():
+    code = "04 "
 #Triggers the main menu UI which displays the user options
 def mainMenu():
     print("Welcome to the Tix ticketing system, please enter one of the following options.")
@@ -186,6 +210,8 @@ def mainMenu():
         addCredit()
     elif selection == "refund":
         refund()
+    elif selection == "sell":
+        sell()
     elif selection == "quit":
        global run
        run = False
