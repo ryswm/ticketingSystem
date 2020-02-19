@@ -14,6 +14,8 @@ def createUser():
     defaultcredit = "000000.00"
     userAdded = False
 
+    #TODO: Check if current user is admin
+
     newUser = input("Please enter your desired username: \n")
     if len(newUser) > 15:
         print("Username cannot exceed 15 characters.")
@@ -49,7 +51,7 @@ def createUser():
             print("Sorry that is not a valid option, user creation cancelled")
         
         if userAdded:   #If successfully added, add transaction to daily transaction list
-            transaction = str(code + newUser + " " + atype + " " + defaultcredit)
+            transaction = str(code + newUser.ljust(15) + " " + atype + " " + defaultcredit)
             dailyTransactions = np.append(dailyTransactions,transaction)
             userAdded = False
 
@@ -85,6 +87,8 @@ def logout():
         currentLogin = False
     print("You have successfully logged out")
     writeTransactions()
+    #TODO: Update currentuserinfo
+
     #TODO: End frontend session
     #TODO: Have backend process all sessions transactions
     #TODO: Read in new account file and event file in preperation for next login
@@ -104,6 +108,8 @@ def delete():
 
                     users = np.delete(users, i, 0) #Delete user from users array
 
+                    #TODO: Erase events with this user as seller
+
                     credit = float(users[i,2]) #Format users credit for transaction line
                     credit = '{:0>9}'.format(str("{:.2f}".format(credit)))
 
@@ -120,6 +126,7 @@ def addCredit():
     global users
     global dailyTransactions
     global currentUserInfo
+
     if currentLogin == True and currentUserInfo["accountType"] == "AA":
         user = input("Enter the name of user to add credit to: \n")
         if user in users: #Check if selected user is a real account
@@ -137,26 +144,27 @@ def addCredit():
 
                         transaction = str(code + user.ljust(15) + " " + users[i,1] + " " + '{:0>9}'.format(users[i,2]))
                         dailyTransactions = np.append(dailyTransactions, transaction)
-    #TODO: Figure out what standard users can actually do with addcredit, unsure of her wording in assignment
-    elif currentLogin == True and currentUserInfo["accountType"] != "AA":
-        user = input("Enter the name of user to add credit to: \n")
-        if user in users: #Check if selected user is a real account
-            amount = int(input("Enter the amount of credit to add: \n"))
+    
+    elif currentLogin == True and currentUserInfo["accountType"] != "AA": #Addcredit for standard user adds to their own credit only
+        amount = int(input("Enter the amount of credit to add: \n"))
 
-            #TODO: Add check against previous addcredit this session
+        #TODO: Add check against previous addcredit this session
 
-            if amount <= 1000: #Check if desired credit ammount is within daily add limit
-                for i in range(len(users[:,:])): #Iterate through usernames
-                    if users[i,0] == user: 
-                        userCredit = float(users[i,2]) #Credit stored as string, must convert to manipulate
-                        userCredit += amount
-                        users[i,2] = str("{:.2f}".format(userCredit))   #Format and reassign to users array
-                        print("Credit added to " + user)
+        if amount <= 1000: #Check if desired credit ammount is within daily add limit
+            for i in range(len(users[:,:])): #Iterate through usernames
+                if users[i,0] == currentUserInfo["username"]: 
+                    userCredit = float(users[i,2]) #Credit stored as string, must convert to manipulate
+                    userCredit += amount
+                    users[i,2] = str("{:.2f}".format(userCredit))   #Format and reassign to users array
+                    currentUserInfo["username"] = str("{:.2f}".format(userCredit))
+                    print("Credit added to " + currentUserInfo["username"])
 
-                        transaction = str(code + user.ljust(15) + " " + users[i,1] + " " + '{:0>9}'.format(users[i,2]))
-                        dailyTransactions = np.append(dailyTransactions, transaction)
+                    transaction = str(code + currentUserInfo["username"].ljust(15) + " " + users[i,1] + " " + '{:0>9}'.format(users[i,2]))
+                    dailyTransactions = np.append(dailyTransactions, transaction)
     else:
         print("Sorry, you must be logged in to use this function.")
+
+#This method refunds credit to the buyer account and debits the seller account
 def refund():
     code = "05 "
     global users
@@ -166,35 +174,33 @@ def refund():
     if currentLogin == True and currentUserInfo["accountType"] == "AA":
         buyer = input("Please enter buyer's account name. \n")
         if buyer in users:
-            for i in range(len(users) - 1):
+            for i in range(len(users)):
                 if users[i,0] == buyer:
                     buyerCredit = float(users[i,2])
+
                     refund = int(input("Please enter refund amount. \n"))
-                    if(refund <= 999999):
+                    if(refund <= 999999) and (refund > 0):
+
                 #TODO: Check that adding the refund to account doesn't exceed credit limit 999999
+                        
                         seller = input("Please enter seller's account name. \n")
-                #TODO: fix subtraction bounds error
                         if seller in users:
-                            for i in range(len(users) - 1):
-                                if users[i,0] == seller:
-                                    credit = (str("{:.2f}".format(refund)))
-                                    buyerCredit += refund
+                            for j in range(len(users)):
+                                if users[j,0] == seller:
+                                    credit = str("{:.2f}".format(refund))
+                                    buyerCredit += float(refund)
                                     users[i, 2] = str("{:.2f}".format(buyerCredit))
                                     print(buyer + " has been refunded")
                                     print(buyer + " now has " + users[i, 2] + " in their account")
 
-                                    sellerCredit = float(users[i,2])
-                                    sellerCredit -= refund
-                                    users[i, 2] = str("{:.2f}".format(sellerCredit))
+                                    sellerCredit = float(users[j,2])
+                                    sellerCredit -= float(refund)
+                                    users[j, 2] = str("{:.2f}".format(sellerCredit))
                                     print(seller + " has been debited")
-                                    print(seller + " now has " + users[i, 2] + " in their account")
+                                    print(seller + " now has " + users[j, 2] + " in their account")
 
                                     transaction = str(code + buyer.ljust(15) + seller.ljust(15) + '{:0>9}'.format(credit))
-                                    print(transaction)
                                     dailyTransactions = np.append(dailyTransactions, transaction)
-
-                                else:
-                                    print("Refund exceeds the maximum amount")
                         else:
                             print("Seller does not exist!")
                     else:
@@ -209,12 +215,15 @@ def sell():
     global currentLogin
     global currentUserInfo
     global dailyTransactions
-    if currentLogin == True and currentUserInfo["accountType"] == "AA":
+    if currentLogin == True and currentUserInfo["accountType"] != "BS":
         eventName = input("Enter the name of the event: ")
         salePrice = input("Enter the sale price of each ticket: ")
         ticketsAmount = input("Please enter the amount of tickets: ")
+
+        #TODO: Add checks for bad input
+        #TODO: Update event array
         
-        transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(13) + ticketsAmount + " " + salePrice)
+        transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(16) + '{:0>3}'.format(ticketsAmount) + " " + '{:0>9}'.format(salePrice))
         dailyTransactions = np.append(dailyTransactions, transaction)
     else:
         print("Sorry, you must be logged in to sell tickets.")
@@ -267,7 +276,7 @@ def mainMenu():
     elif selection == "r":
         print(users)
         print(events)
-        print(dailyTransactions[0])
+        print(dailyTransactions)
     elif selection == "w":
         writeTransactions()
     else:
@@ -313,7 +322,7 @@ def writeTransactions():        #Write daily transactions; triggered upon logout
     user = currentUserInfo["username"]
     type = currentUserInfo["accountType"]
     credit = currentUserInfo["credit"]
-    endLine = str("00 " + user.ljust(15) + " " + type + " " + credit)
+    endLine = str("00 " + user.ljust(15) + " " + type + " " + '{:0>9}'.format(credit))
     f = open("transactionFile.txt", "w")
     for i in range(len(dailyTransactions)):
         f.write(dailyTransactions[i] + "\n")
