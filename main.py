@@ -1,4 +1,7 @@
 #!/usr/bin/env python3  #Setting interpreter
+#Jonathan Bajada 500798771
+#Ryan Woodworth 500752821
+#Manuel Oshana   500699021
 import numpy as np
 from decimal import *
 
