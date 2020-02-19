@@ -1,6 +1,5 @@
 #!/usr/bin/env python3  #Setting interpreter
 import numpy as np
-import re
 from decimal import *
 
 #TODO: EVENT FILE
@@ -243,9 +242,8 @@ def buy():
     
     for elem in events:
         if eventName in elem and sellerName in users:
-            eventInfo = re.split("( )", str(elem))
-            salePrice = eventInfo[8]
-            print(salePrice)
+            eventInfo = eventName.rstrip(" ")
+            print(eventInfo)
         #transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(13) + ticketQuantity + " " + salePrice)
         #dailyTransactions = np.append(dailyTransactions, transaction)
 
