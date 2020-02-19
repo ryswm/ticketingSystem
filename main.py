@@ -240,9 +240,9 @@ def buy():
     ticketQuantity = input("How many tickets would you like to buy? ")
     sellerName = input("Please enter the name of the seller: ")
     
-    for elem in events:
-        if eventName in elem and sellerName in users:
-            eventInfo = eventName.rstrip(" ")
+    for i in range(len(events)):
+        if eventName == event[i,0] and sellerName in users:
+            eventInfo = event[i,0] # [Title, Seller, amount of tickets, price of tickets]
             print(eventInfo)
         #transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(13) + ticketQuantity + " " + salePrice)
         #dailyTransactions = np.append(dailyTransactions, transaction)
