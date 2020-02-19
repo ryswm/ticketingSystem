@@ -156,6 +156,8 @@ def addCredit():
                         dailyTransactions = np.append(dailyTransactions, transaction)
     else:
         print("Sorry, you must be logged in to use this function.")
+
+#This method refunds credit to the buyer account and debits the seller account
 def refund():
     code = "05 "
     global users
@@ -208,7 +210,7 @@ def sell():
     global currentLogin
     global currentUserInfo
     global dailyTransactions
-    if currentLogin == True and currentUserInfo["accountType"] == "AA":
+    if currentLogin == True and currentUserInfo["accountType"] != "BS":
         eventName = input("Enter the name of the event: ")
         salePrice = input("Enter the sale price of each ticket: ")
         ticketsAmount = input("Please enter the amount of tickets: ")
