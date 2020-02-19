@@ -1,5 +1,6 @@
 #!/usr/bin/env python3  #Setting interpreter
 import numpy as np
+import re
 from decimal import *
 
 #TODO: EVENT FILE
@@ -220,7 +221,25 @@ def sell():
 
 def buy():
     code = "04 "
+    global users
+    global currentLogin
+    global currentUserInfo
+    global dailyTransactions
+    global events
+    print(events)
+
+    eventName = input("Enter the name of the event you wish to purchase tickets to: ")
+    ticketQuantity = input("How many tickets would you like to buy? ")
+    sellerName = input("Please enter the name of the seller: ")
     
+    for elem in events:
+        if eventName in elem and sellerName in users:
+            eventInfo = re.split("( )", str(elem))
+            salePrice = eventInfo[8]
+            print(salePrice)
+        #transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(13) + ticketQuantity + " " + salePrice)
+        #dailyTransactions = np.append(dailyTransactions, transaction)
+
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
@@ -240,6 +259,8 @@ def mainMenu():
         refund()
     elif selection == "sell":
         sell()
+    elif selection == "buy":
+        buy()
     elif selection == "quit":
        global run
        run = False
