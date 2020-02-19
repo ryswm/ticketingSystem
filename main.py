@@ -1,7 +1,26 @@
 #!/usr/bin/env python3  #Setting interpreter
+
+
 #Jonathan Bajada 500798771
 #Ryan Woodworth 500752821
 #Manuel Oshana   500699021
+
+## This is the frontend of the TIX ticketing system.
+## This program when started will read input from AccountFile.txt and eventFile.txt in order to
+#  collect the necessary information for the session.
+## Once a logout transaction is processed, the program will write the session's transaction history to the file transactionFile.txt 
+#  for the backend to further process
+
+## *IMPORTANT*
+## Before running, please ensure your environment has python 3.7.5 installed
+## This program uses the Numpy Library, which must be installed prior to start. This can be done with the following command in a terminal:
+## pip3 install numpy
+
+##To Run: 
+# python3 main.py
+
+
+
 import numpy as np
 from decimal import *
 
@@ -82,6 +101,7 @@ def login():
     elif currentUser not in users:
         print("User does not exist in the system.")
 
+#This function initiates the transaction history to be written to file (transactionFile.txt)
 def logout():
     code = "00"
     global currentLogin
@@ -123,6 +143,8 @@ def delete():
     else:
         print("Please login as an admin to use the delete function.")
 
+
+#This function adds credit to a user
 def addCredit():
     code = "06 "
     global users
@@ -212,6 +234,7 @@ def refund():
     else:
         print("Please login as an admin to use the refund function.")
 
+#This function allows a user to create a new event
 def sell():
     code = "03 "
     global currentLogin
@@ -230,6 +253,8 @@ def sell():
     else:
         print("Sorry, you must be logged in to sell tickets.")
 
+
+#This function allows a user to buy tickets to an existing event
 def buy():
     code = "04 "
     global users
@@ -278,18 +303,13 @@ def mainMenu():
     elif selection == "quit":
        global run
        run = False
-    elif selection == "r":
-        print(users)
-        print(events)
-        print(dailyTransactions)
-    elif selection == "w":
-        writeTransactions()
     else:
         print("\nSorry but that is not a valid option\n")
-    #TODO: Add the rest of the options once the functions are made
 
 
-def readAccounts():         #Read current account file; triggered at startup and after backend is finished changes
+
+#Read current account file; triggered at startup and after backend is finished changes
+def readAccounts():         
     file = open("AccountFile.txt","r")
     lines = file.readlines()
     file.close()
@@ -303,8 +323,8 @@ def readAccounts():         #Read current account file; triggered at startup and
         user = [username, status, credit]
         users.append(user)
 
-
-def readEvents():               #Read current events file; triggered at startup and after backend is finished changes
+#Read current events file; triggered at startup and after backend is finished changes
+def readEvents():               
     file = open("eventFile.txt", "r")
     lines = file.readlines()
     file.close()
@@ -320,7 +340,8 @@ def readEvents():               #Read current events file; triggered at startup 
         events.append(event)
 
 
-def writeTransactions():        #Write daily transactions; triggered upon logout function
+#Write daily transactions; triggered upon logout function
+def writeTransactions():        
     global currentUserInfo
     global dailyTransactions
 
