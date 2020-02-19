@@ -102,6 +102,7 @@ def delete():
                 if users[i,0] == deleteUser:
 
                     users = np.delete(users, i, 0) #Delete user from users array
+                    #TODO: Erase events with this user as seller
 
                     credit = float(users[i,2]) #Format users credit for transaction line
                     credit = '{:0>9}'.format(str("{:.2f}".format(credit)))
@@ -295,6 +296,7 @@ def writeTransactions():        #Write daily transactions; triggered upon logout
     endLine = str("00 " + user.ljust(15) + " " + type + " " + credit)
     f = open("transactionFile.txt", "w")
     for i in range(len(dailyTransactions)):
+        #TODO: reverse list order on write
         f.write(dailyTransactions[i] + "\n")
     f.write(endLine)
     f.close()
