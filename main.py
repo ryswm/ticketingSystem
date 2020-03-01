@@ -23,6 +23,7 @@
 
 import numpy as np
 from decimal import *
+import sys
 
 #TODO: EVENT FILE
 
@@ -310,7 +311,7 @@ def mainMenu():
 
 #Read current account file; triggered at startup and after backend is finished changes
 def readAccounts():         
-    file = open("AccountFile.txt","r")
+    file = open(sys.argv[1],"r")
     lines = file.readlines()
     file.close()
     global users
@@ -325,7 +326,7 @@ def readAccounts():
 
 #Read current events file; triggered at startup and after backend is finished changes
 def readEvents():               
-    file = open("eventFile.txt", "r")
+    file = open(sys.argv[2], "r")
     lines = file.readlines()
     file.close()
 

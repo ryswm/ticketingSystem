@@ -1,2 +1,1 @@
-05 hello          admin          000200.00
 00 admin           AA 000400.00
