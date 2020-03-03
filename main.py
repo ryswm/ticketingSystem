@@ -24,6 +24,7 @@
 import numpy as np
 from decimal import *
 import sys
+import os
 
 #TODO: EVENT FILE
 
@@ -283,6 +284,7 @@ def buy():
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
+    print(sys.argv[3])
     print("Welcome to the Tix ticketing system, please enter one of the following options.")
     selection = input(" 1. create \n 2. login \n 3. logout \n 4. delete \n 5. sell \n 6. buy \n 7. refund \n 8. addcredit \n 9. quit\n")
     if selection == "create":
@@ -350,7 +352,8 @@ def writeTransactions():
     type = currentUserInfo["accountType"]
     credit = currentUserInfo["credit"]
     endLine = str("00 " + user.ljust(15) + " " + type + " " + '{:0>9}'.format(credit))
-    f = open(sys.argv[3], "w")
+
+    f = open(os.getcwd()+sys.argv[3], "w+")
     for i in range(len(dailyTransactions)):
         f.write(dailyTransactions[i] + "\n")
     f.write(endLine)

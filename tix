@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #This script runs the tix program (main.py python script) with a text file as user input
 
@@ -14,7 +14,3 @@ do
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
-
-
-
-
