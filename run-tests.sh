@@ -4,4 +4,8 @@
 
 numF=$(find ./Tests/inputs -type f -name "*.txt" | wc -l)
 ((numTests = numF/2))
-echo $numTests
+
+for i in numTests
+do
+    
+done
