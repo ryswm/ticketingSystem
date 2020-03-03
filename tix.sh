@@ -6,10 +6,11 @@ loginTests=$(find ./Tests/inputs/login -type f -name "*.tti")
 for i in $loginTests
 do
     name="${i##*/}"
-    base="${name%.*}"
+    base="${name%.*}"    
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
@@ -22,6 +23,7 @@ do
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
@@ -34,6 +36,7 @@ do
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
@@ -46,6 +49,7 @@ do
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
@@ -58,6 +62,7 @@ do
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
@@ -70,6 +75,7 @@ do
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
@@ -82,11 +88,10 @@ do
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
-
-
 
 refundTests=$(find ./Tests/inputs/refund -type f -name "*.tti")
 for i in $refundTests
@@ -96,6 +101,7 @@ do
     acc=$(find ./Tests/inputs -type f -name "$base.tai")
     event=$(find ./Tests/inputs -type f -name "$base.tei")
     transaction="/Tests/outputs/$base.adt"
+    echo "Running test: $base"
     python3 main.py $acc $event $transaction < $i > ./Tests/outputs/$base.ato
 
 done
