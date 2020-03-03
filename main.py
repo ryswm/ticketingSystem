@@ -284,7 +284,6 @@ def buy():
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
-    print(sys.argv[3])
     print("Welcome to the Tix ticketing system, please enter one of the following options.")
     selection = input(" 1. create \n 2. login \n 3. logout \n 4. delete \n 5. sell \n 6. buy \n 7. refund \n 8. addcredit \n 9. quit\n")
     if selection == "create":
@@ -313,7 +312,7 @@ def mainMenu():
 
 #Read current account file; triggered at startup and after backend is finished changes
 def readAccounts():         
-    file = open(sys.argv[1],"r")
+    file = open(AccountF,"r")
     lines = file.readlines()
     file.close()
     global users
@@ -328,7 +327,7 @@ def readAccounts():
 
 #Read current events file; triggered at startup and after backend is finished changes
 def readEvents():               
-    file = open(sys.argv[2], "r")
+    file = open(EventF, "r")
     lines = file.readlines()
     file.close()
 
@@ -353,7 +352,7 @@ def writeTransactions():
     credit = currentUserInfo["credit"]
     endLine = str("00 " + user.ljust(15) + " " + type + " " + '{:0>9}'.format(credit))
 
-    f = open(os.getcwd()+sys.argv[3], "w+")
+    f = open(os.getcwd()+TransactionF, "w+")
     for i in range(len(dailyTransactions)):
         f.write(dailyTransactions[i] + "\n")
     f.write(endLine)
@@ -371,6 +370,15 @@ currentUserInfo = {             #Dictionary of logged in user details
     "accountType":"",
     "credit":""
 }
+
+if len(sys.argv) < 3:
+    AccountF = "AccountFile.txt"
+    EventF = "eventFile.txt"
+    TransactionF = "transactionFile.txt"
+else:
+    AccountF = sys.argv[1]
+    EventF = sys.argv[2]
+    TransactionF = sys.argv[3]
 
 readAccounts()  #Read in account file at start
 users = np.asarray(users)
