@@ -2,10 +2,7 @@
 #include <unistd.h>
 
 
-numF=$(find ./Tests/inputs -type f -name "*.txt" | wc -l)
-((numTests = numF/2))
-
-for i in numTests
-do
-    
+numF=$(find ./Tests/inputs -type f -name "*.tti")
+for i in $numF; do
+    echo $i
 done
