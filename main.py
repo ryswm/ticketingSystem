@@ -350,7 +350,7 @@ def writeTransactions():
     type = currentUserInfo["accountType"]
     credit = currentUserInfo["credit"]
     endLine = str("00 " + user.ljust(15) + " " + type + " " + '{:0>9}'.format(credit))
-    f = open("transactionFile.txt", "w")
+    f = open(sys.argv[3], "w")
     for i in range(len(dailyTransactions)):
         f.write(dailyTransactions[i] + "\n")
     f.write(endLine)
