@@ -2,7 +2,7 @@
 
 #This script runs the tix program (main.py python script) with a text file as user input
 
-loginTests=$(find ./Tests/inputs/login -type f -name "*.tti")
+loginTests=$(find ./Tests/inputs/login -type f -name "*.tti" | sort --version-sort)
 for i in $loginTests
 do
     name="${i##*/}"
@@ -15,7 +15,7 @@ do
 
 done
 
-logoutTests=$(find ./Tests/inputs/logout -type f -name "*.tti")
+logoutTests=$(find ./Tests/inputs/logout -type f -name "*.tti" | sort --version-sort)
 for i in $logoutTests
 do
     name="${i##*/}"
@@ -28,7 +28,7 @@ do
 
 done
 
-creditTests=$(find ./Tests/inputs/addCredit -type f -name "*.tti")
+creditTests=$(find ./Tests/inputs/addCredit -type f -name "*.tti" | sort --version-sort)
 for i in $creditTests
 do
     name="${i##*/}"
@@ -41,7 +41,7 @@ do
 
 done
 
-createTests=$(find ./Tests/inputs/create -type f -name "*.tti")
+createTests=$(find ./Tests/inputs/create -type f -name "*.tti" | sort --version-sort)
 for i in $createTests
 do
     name="${i##*/}"
@@ -54,7 +54,7 @@ do
 
 done
 
-deleteTests=$(find ./Tests/inputs/delete -type f -name "*.tti")
+deleteTests=$(find ./Tests/inputs/delete -type f -name "*.tti" | sort --version-sort)
 for i in $deleteTests
 do
     name="${i##*/}"
@@ -67,7 +67,7 @@ do
 
 done
 
-buyTests=$(find ./Tests/inputs/buy -type f -name "*.tti")
+buyTests=$(find ./Tests/inputs/buy -type f -name "*.tti" | sort --version-sort)
 for i in $buyTests
 do
     name="${i##*/}"
@@ -80,7 +80,7 @@ do
 
 done
 
-sellTests=$(find ./Tests/inputs/sell -type f -name "*.tti")
+sellTests=$(find ./Tests/inputs/sell -type f -name "*.tti" | sort --version-sort)
 for i in $sellTests
 do
     name="${i##*/}"
@@ -93,7 +93,7 @@ do
 
 done
 
-refundTests=$(find ./Tests/inputs/refund -type f -name "*.tti")
+refundTests=$(find ./Tests/inputs/refund -type f -name "*.tti" | sort --version-sort)
 for i in $refundTests
 do
     name="${i##*/}"
