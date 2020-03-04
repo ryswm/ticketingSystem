@@ -9,7 +9,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  8. addcredit
  9. quit
 Please enter your username to login
-Successfully logged in as: bs
+Successfully logged in as: admin
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
@@ -20,9 +20,10 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund
  8. addcredit
  9. quit
-Enter the name of the event: billy idol
+Enter the name of the event: kanye west
 Enter the sale price of each ticket: 123.99
 Please enter the amount of tickets: 100
+Sorry, you already have an event with this name
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login

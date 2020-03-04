@@ -9,7 +9,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  8. addcredit
  9. quit
 Please enter your username to login
-Successfully logged in as: bs
+Successfully logged in as: admin
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
@@ -33,7 +33,9 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund
  8. addcredit
  9. quit
-You have successfully logged out
+ Sorry, this event is not ready for sale/can not be found
+Enter the name of the event you wish to purchase tickets to: billy idol
+Error: Invalid event name or seller name.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
@@ -44,3 +46,15 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund
  8. addcredit
  9. quit
+ You have successfully logged out
+Welcome to the Tix ticketing system, please enter one of the following options.
+ 1. create
+ 2. login
+ 3. logout
+ 4. delete
+ 5. sell
+ 6. buy
+ 7. refund
+ 8. addcredit
+ 9. quit
+

@@ -20,9 +20,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund
  8. addcredit
  9. quit
-Enter the name of the event: billy idol
-Enter the sale price of each ticket: 123.99
-Please enter the amount of tickets: 100
+Your account does not have the qualifications to sell tickets
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
@@ -44,3 +42,4 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund
  8. addcredit
  9. quit
+

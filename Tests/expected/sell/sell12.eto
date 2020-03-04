@@ -20,7 +20,10 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund
  8. addcredit
  9. quit
-Enter the name of the event: Enter the sale price of each ticket: Please enter the amount of tickets: Welcome to the Tix ticketing system, please enter one of the following options.
+Enter the name of the event: billy idol
+Enter the sale price of each ticket: 123.99
+Please enter the amount of tickets: 100
+Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
  3. logout
