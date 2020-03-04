@@ -9,10 +9,8 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  8. addcredit
  9. quit
 Please enter your username to login
-Successfully logged in as: admin
-Please enter your desired username: username
-Please enter the account type for this user: AA
-Successfully created the user, username
+Successfully logged in as: fs
+Permission denied
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
