@@ -22,12 +22,9 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-delete
-Enter the username to delete: 
-(Warning, deleted accounts cannot be recovered)
-fs
-Successfully deleted the user,fs  
- -------------------------------
+buy
+Enter the name of the event you wish to purchase tickets to: eventnameistoolong1
+Event name must be less than 18 characters.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
