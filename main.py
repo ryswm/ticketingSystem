@@ -43,7 +43,7 @@ def createUser():
     if len(newUser) > 15:
         print("Username cannot exceed 15 characters.")
     elif newUser == "":
-        print("Error, username cannot be blank.")
+        print("Error, username cannot be empty.")
     elif newUser in users:
         print("Sorry, this username is already taken.")
     elif newUser not in users:
