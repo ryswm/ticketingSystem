@@ -1,6 +1,8 @@
 #!/bin/sh
 
 echo "\n-----------------------------------\n"
+rm -f ./results/terminalout/*.resterm
+rm -f ./results/transactionout/*.restran
 
 #Checking difference between expected and actual terminal output
 testout=$(find ./Tests/expected -type f -name "*.eto" | sort --version-sort)  #Find all expected terminal output files
@@ -31,14 +33,17 @@ do
 
     actual=$(find ./Tests/outputs -type f -name "$base.adt")
     #expected=$(find ./Tests/expected -type f -name "$base.edt")
-    
-    difference=$(diff $actual $name)
 
-    if [ "$difference" != "" ]
-    then
-        echo $difference > ./Tests/results/transactionout/$base.restran
-    else
-        echo "Test $base transaction file passed"
+    if test -f "$actual"; then
+    
+        difference=$(diff $actual $i)
+
+        if [ "$difference" != "" ]
+        then
+            echo $difference > ./Tests/results/transactionout/$base.restran
+        else
+            echo "Test $base transaction file passed"
+        fi
     fi
 done
 
