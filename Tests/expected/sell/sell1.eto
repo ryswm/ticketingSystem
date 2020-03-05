@@ -1,4 +1,4 @@
- Welcome to the Tix ticketing system, please enter one of the following options.
+Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
  3. logout
@@ -22,7 +22,8 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  9. quit
 Enter the name of the event:
 Enter the sale price of each ticket:
-Please enter the amount of tickets
+Please enter the amount of tickets:
+There can be no empty fields!
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create
  2. login
