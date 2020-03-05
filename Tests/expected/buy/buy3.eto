@@ -8,10 +8,8 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-login
 Please enter your username to login 
-admin
-Successfully logged in as: admin
+Successfully logged in as:
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -22,10 +20,9 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-buy
 Enter the name of the event you wish to purchase tickets to: event
-How many tickets would you like to buy? 1
-Please enter the name of the seller: seller
+How many tickets would you like to buy?
+Please enter the name of the seller:
 Error: Invalid event name or seller name.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -37,7 +34,6 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-logout
 You have successfully logged out
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -49,5 +45,4 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-
 

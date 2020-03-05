@@ -8,9 +8,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-login
 Please enter your username to login 
-admin
 Successfully logged in as: admin
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -22,12 +20,9 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-buy
-[['kanye west' 'ryanw' '199' '123.99']
- ['END' '' '   ' '      ']]
 Enter the name of the event you wish to purchase tickets to: kanye west
-How many tickets would you like to buy? 1
-Please enter the name of the seller: sellernametoolong
+How many tickets would you like to buy?
+Please enter the name of the seller:
 Seller name must be less than 18 characters.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -39,7 +34,6 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-logout
 You have successfully logged out
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
