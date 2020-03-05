@@ -131,14 +131,13 @@ def delete():
     code = "02 "
     if currentLogin == True and currentUserInfo["accountType"] == "AA":
         deleteUser = input("Enter the username to delete: \n(Warning, deleted accounts cannot be recovered)\n")
-        if deleteUser in users:                     #If selected user is real account
+        if deleteUser == currentUserInfo["username"]:
+            print("Can not delete self")
+        elif deleteUser in users:                     #If selected user is real account
             for i in range(len(users) - 1):           
                 if users[i,0] == deleteUser:
-
                     users = np.delete(users, i, 0) #Delete user from users array
-
                     #TODO: Erase events with this user as seller
-
                     credit = float(users[i,2]) #Format users credit for transaction line
                     credit = '{:0>9}'.format(str("{:.2f}".format(credit)))
 

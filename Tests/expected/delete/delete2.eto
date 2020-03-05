@@ -22,7 +22,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  9. quit
 Enter the username to delete: 
 (Warning, deleted accounts cannot be recovered)
-Cannot delete account you are logged in as.
+Can not delete self
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -44,4 +44,3 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-
