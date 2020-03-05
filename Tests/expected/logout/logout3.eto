@@ -20,17 +20,6 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-Please login as an admin to use the delete function.
-Welcome to the Tix ticketing system, please enter one of the following options.
- 1. create 
- 2. login 
- 3. logout 
- 4. delete 
- 5. sell 
- 6. buy 
- 7. refund 
- 8. addcredit 
- 9. quit
 You have successfully logged out
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -42,5 +31,4 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-
 

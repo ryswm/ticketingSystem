@@ -10,8 +10,8 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  9. quit
 Please enter your username to login
 Successfully logged in as: admin
-Please enter your desired username: username
-Please enter the account type for this user: AA
+Please enter your desired username:
+Please enter the account type for this user:
 Successfully created the user, username
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create

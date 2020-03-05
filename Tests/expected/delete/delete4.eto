@@ -8,9 +8,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-login
 Please enter your username to login 
-ss
 Successfully logged in as: ss
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -22,7 +20,6 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-delete
 Please login as an admin to use the delete function.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -34,7 +31,6 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-logout
 You have successfully logged out
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
