@@ -39,45 +39,47 @@ def createUser():
 
     #TODO: Check if current user is admin
 
-    newUser = input("Please enter your desired username: \n")
-    if len(newUser) > 15:
-        print("Username cannot exceed 15 characters.")
-    elif newUser in users:
-        print("Sorry, this username is already taken.")
-    elif newUser not in users:
-        atype = input("Please enter the account type for this user: \n")
-        if(atype == "AA"):
-            atype = "AA"
-            print("Successfully created the user, " + newUser)
-            new = np.array([[newUser,atype,defaultcredit]])
-            users = np.concatenate((new,users),axis=0)
-            userAdded = True
-        elif(atype == "FS"):
-            type = "FS"
-            print("Successfully created the user, " + newUser)
-            new = np.array([[newUser,atype,defaultcredit]])
-            users = np.concatenate((new,users),axis=0)
-            userAdded = True
-        elif(atype == "BS"):
-            type = "BS"
-            print("Successfully created the user, " + newUser)
-            new = np.array([[newUser,atype,defaultcredit]])
-            users = np.concatenate((new,users),axis=0)
-            userAdded = True
-        elif(atype == "SS"):
-            type = "SS"
-            print("Successfully created the user, " + newUser)
-            new = np.array([[newUser,atype,defaultcredit]])
-            users = np.concatenate((new,users),axis=0)
-            userAdded = True
-        else:
-            print("Sorry that is not a valid option, user creation cancelled")
+    if currentUserInfo["accountType"] == "AA" and currentLogin == True:
+        newUser = input("Please enter your desired username: \n")
+        if len(newUser) > 15:
+            print("Username cannot exceed 15 characters.")
+        elif newUser in users:
+            print("Sorry, this username is already taken.")
+        elif newUser not in users:
+            atype = input("Please enter the account type for this user: \n")
+            if(atype == "AA"):
+                atype = "AA"
+                print("Successfully created the user, " + newUser)
+                new = np.array([[newUser,atype,defaultcredit]])
+                users = np.concatenate((new,users),axis=0)
+                userAdded = True
+            elif(atype == "FS"):
+                type = "FS"
+                print("Successfully created the user, " + newUser)
+                new = np.array([[newUser,atype,defaultcredit]])
+                users = np.concatenate((new,users),axis=0)
+                userAdded = True
+            elif(atype == "BS"):
+                type = "BS"
+                print("Successfully created the user, " + newUser)
+                new = np.array([[newUser,atype,defaultcredit]])
+                users = np.concatenate((new,users),axis=0)
+                userAdded = True
+            elif(atype == "SS"):
+                type = "SS"
+                print("Successfully created the user, " + newUser)
+                new = np.array([[newUser,atype,defaultcredit]])
+                users = np.concatenate((new,users),axis=0)
+                userAdded = True
+            else:
+                print("Sorry that is not a valid option, user creation cancelled")
         
         if userAdded:   #If successfully added, add transaction to daily transaction list
             transaction = str(code + newUser.ljust(15) + " " + atype + " " + defaultcredit)
             dailyTransactions = np.append(dailyTransactions,transaction)
             userAdded = False
-
+    else:
+        print("Please login")
 
 #This method verifies the users login credentials
 def login():    
