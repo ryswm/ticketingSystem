@@ -8,7 +8,6 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-login
 Please enter your username to login 
 Successfully logged in as: admin
 Welcome to the Tix ticketing system, please enter one of the following options.
@@ -21,10 +20,9 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-Enter the name of the event you wish to purchase tickets to: kanye west
+Enter the name of the event you wish to purchase tickets to:
 How many tickets would you like to buy?
 Please enter the name of the seller:
-You are purchasing, 1 ticket(s) at the price of 123.99 per ticket. Type 'yes' if this is correct. yes
 Not enough tickets remaining.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -47,5 +45,3 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-
-

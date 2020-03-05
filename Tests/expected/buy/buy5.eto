@@ -22,7 +22,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  8. addcredit 
  9. quit
 Enter the name of the event you wish to purchase tickets to:
-Event name must be less than 18 characters.
+Error: Invalid event name or seller name.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -44,4 +44,3 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-

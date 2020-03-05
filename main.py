@@ -271,13 +271,16 @@ def buy():
     
     for i in range(len(events)):
         if eventName == events[i,0] and sellerName == events[i,1]:
-            #eventInfo = events[i,0] # [Title, Seller, amount of tickets, price of tickets]
-            confirmation = input("You are purchasing, " + ticketQuantity + " ticket(s) at the price of " + events[i,3] + " per ticket. Type 'yes' if this is correct. ")
-            if confirmation == "yes":
-                events[i,2] = str( float(events[i,2]) - float(ticketQuantity))
-                print("Thank you for your purchase.")
-                transaction = str(code + eventName.ljust(19) + (events[i,1]).ljust(13) + ticketQuantity + " " + events[i, 2])
-                dailyTransactions = np.append(dailyTransactions, transaction)
+            if ticketQuantity < events[i,2]:
+                #eventInfo = events[i,0] # [Title, Seller, amount of tickets, price of tickets]
+                confirmation = input("You are purchasing, " + ticketQuantity + " ticket(s) at the price of " + events[i,3] + " per ticket. Type 'yes' if this is correct. ")
+                if confirmation == "yes":
+                    events[i,2] = str( float(events[i,2]) - float(ticketQuantity))
+                    print("Thank you for your purchase.")
+                    transaction = str(code + eventName.ljust(19) + (events[i,1]).ljust(13) + ticketQuantity + " " + events[i, 2])
+                    dailyTransactions = np.append(dailyTransactions, transaction)
+            else:
+                print("Not enough tickets remaining.")
         else:
             print("Error: Invalid event name or seller name.")
 
