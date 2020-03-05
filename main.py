@@ -247,11 +247,13 @@ def sell():
         salePrice = input("Enter the sale price of each ticket:\n")
         ticketsAmount = input("Please enter the amount of tickets:\n")
 
+        if eventName == "" or salePrice == "" or ticketsAmount == "":
+                print("There can be no empty fields!")
+        else:
+                transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(16) + '{:0>3}'.format(ticketsAmount) + " " + '{:0>9}'.format(salePrice))
+                dailyTransactions = np.append(dailyTransactions, transaction)
         #TODO: Add checks for bad input
         #TODO: Update event array
-        
-        transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(16) + '{:0>3}'.format(ticketsAmount) + " " + '{:0>9}'.format(salePrice))
-        dailyTransactions = np.append(dailyTransactions, transaction)
     else:
         print("Sorry, you must be logged in to sell tickets.")
 
