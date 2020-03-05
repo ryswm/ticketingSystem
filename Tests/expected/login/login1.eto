@@ -8,10 +8,8 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-login 
 Please enter your username to login 
-
-Username cannot be blank.
+User does not exist in the system.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -22,5 +20,4 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-
-
+ 

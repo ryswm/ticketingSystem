@@ -8,7 +8,6 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-buy
 You must be logged in to perform this action.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
@@ -20,5 +19,3 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-
-

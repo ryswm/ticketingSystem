@@ -1,0 +1,1 @@
+10a11 > login 11a13 > ss 22a25 > delete 34,36c37,38 < < Sorry but that is not a valid option < --- > logout > You have successfully logged out 48,59d49 < Sorry but that is not a valid option < < Welcome to the Tix ticketing system, please enter one of the following options. < 1. create < 2. login < 3. logout < 4. delete < 5. sell < 6. buy < 7. refund < 8. addcredit < 9. quit

@@ -264,7 +264,6 @@ def buy():
     global currentUserInfo
     global dailyTransactions
     global events
-    print(events)
 
     eventName = input("Enter the name of the event you wish to purchase tickets to: ")
     ticketQuantity = input("How many tickets would you like to buy? ")
