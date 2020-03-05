@@ -23,7 +23,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
 Enter the name of the event you wish to purchase tickets to:
 How many tickets would you like to buy?
 Please enter the name of the seller:
-Error: Invalid event name or seller name.
+Error: Invalid seller name.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 

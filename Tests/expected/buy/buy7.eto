@@ -9,7 +9,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  8. addcredit 
  9. quit
 Please enter your username to login 
-Successfully logged in as: fs
+Successfully logged in as: admin
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -24,7 +24,7 @@ Enter the name of the event you wish to purchase tickets to:
 How many tickets would you like to buy?
 Please enter the name of the seller:
 You are purchasing, 1 ticket(s) at the price of 123.99 per ticket. Type 'yes' if this is correct. 
-Purchase confirmation denied.
+Purchase declined.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 

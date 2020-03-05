@@ -265,24 +265,34 @@ def buy():
     global dailyTransactions
     global events
 
+    yes = 1
+
     eventName = input("Enter the name of the event you wish to purchase tickets to:\n")
     ticketQuantity = input("How many tickets would you like to buy?\n")
     sellerName = input("Please enter the name of the seller:\n")
     
     for i in range(len(events)):
-        if eventName == events[i,0] and sellerName == events[i,1]:
-            if ticketQuantity < events[i,2]:
+        if (eventName == events[i,0]) and (sellerName == events[i,1]):
+            yes = 0
+            if ticketQuantity <= events[i,2]:
                 #eventInfo = events[i,0] # [Title, Seller, amount of tickets, price of tickets]
-                confirmation = input("You are purchasing, " + ticketQuantity + " ticket(s) at the price of " + events[i,3] + " per ticket. Type 'yes' if this is correct. ")
+                confirmation = input("You are purchasing, " + ticketQuantity + " ticket(s) at the price of " + events[i,3] + " per ticket. Type 'yes' if this is correct.\n")
                 if confirmation == "yes":
                     events[i,2] = str( float(events[i,2]) - float(ticketQuantity))
                     print("Thank you for your purchase.")
                     transaction = str(code + eventName.ljust(19) + (events[i,1]).ljust(13) + ticketQuantity + " " + events[i, 2])
                     dailyTransactions = np.append(dailyTransactions, transaction)
+                else:
+                    print("Purchase declined.")
             else:
                 print("Not enough tickets remaining.")
-        else:
-            print("Error: Invalid event name or seller name.")
+        elif eventName == events[i,0]:
+            print("Error: Invalid seller name.")
+        elif sellerName == events[i,1]:
+            print("Error: Invalid event name.")
+    
+    if yes > 0:
+        print("Error: Invalid event or seller name.")
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
@@ -307,6 +317,8 @@ def mainMenu():
     elif selection == "quit":
        global run
        run = False
+    elif selection == "r":
+        print(events)
     else:
         print("\nSorry but that is not a valid option\n")
 
