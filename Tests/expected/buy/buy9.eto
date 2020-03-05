@@ -8,10 +8,8 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-login
 Please enter your username to login 
-fs
-Successfully logged in as: fs
+Successfully logged in as: bs
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -22,12 +20,10 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-Enter the name of the event you wish to purchase tickets to: kanye west
-How many tickets would you like to buy? 
+Enter the name of the event you wish to purchase tickets to:
+How many tickets would you like to buy?
 Please enter the name of the seller:
-You are purchasing, 5 ticket(s) at the price of 123.99 per ticket. Type 'yes' if this is correct. 
-Thank you for your purchase.
-Error: Invalid event name or seller name.
+Max tickets you may purchase is 4
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 

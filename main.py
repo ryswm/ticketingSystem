@@ -266,34 +266,51 @@ def buy():
     global currentUserInfo
     global dailyTransactions
     global events
-
     yes = 1
 
-    eventName = input("Enter the name of the event you wish to purchase tickets to:\n")
-    ticketQuantity = input("How many tickets would you like to buy?\n")
-    sellerName = input("Please enter the name of the seller:\n")
+    if currentUserInfo["accountType"] == "SS":
+        print("Sellers can not buy")
+    else:
+        eventName = input("Enter the name of the event you wish to purchase tickets to:\n")
+        ticketQuantity = input("How many tickets would you like to buy?\n")
+        sellerName = input("Please enter the name of the seller:\n")
     
-    for i in range(len(events)):
-        if (eventName == events[i,0]) and (sellerName == events[i,1]):
-            yes = 0
-            if ticketQuantity <= events[i,2]:
-                #eventInfo = events[i,0] # [Title, Seller, amount of tickets, price of tickets]
-                confirmation = input("You are purchasing, " + ticketQuantity + " ticket(s) at the price of " + events[i,3] + " per ticket. Type 'yes' if this is correct.\n")
-                if confirmation == "yes":
-                    events[i,2] = str( float(events[i,2]) - float(ticketQuantity))
-                    print("Thank you for your purchase.")
-                    transaction = str(code + eventName.ljust(19) + (events[i,1]).ljust(13) + ticketQuantity + " " + events[i, 2])
-                    dailyTransactions = np.append(dailyTransactions, transaction)
+        for i in range(len(events)):
+            if (eventName == events[i,0]) and (sellerName == events[i,1]):
+                yes = 0
+                if int(ticketQuantity) <= int(events[i,2]):
+                    if int(ticketQuantity) <= 0:
+                        print("Ticket amount must be greater than 0")
+                    elif (float(currentUserInfo["credit"]) - (float(events[i,3])*int(ticketQuantity))) < 0:
+                        print("Not enough credit")
+                    elif currentUserInfo["accountType"] != "AA" and int(ticketQuantity) <= 4:
+                        #eventInfo = events[i,0] # [Title, Seller, amount of tickets, price of tickets]
+                        confirmation = input("You are purchasing, " + ticketQuantity + " ticket(s) at the price of " + events[i,3] + " per ticket. Type 'yes' if this is correct.\n")
+                        if confirmation == "yes":
+                            events[i,2] = str( float(events[i,2]) - float(ticketQuantity))
+                            print("Thank you for your purchase.")
+                            transaction = str(code + eventName.ljust(19) + (events[i,1]).ljust(16) + '{:0>3}'.format(ticketQuantity) + " " + '{:0>9}'.format(events[i, 3]))
+                            dailyTransactions = np.append(dailyTransactions, transaction)
+                        else:
+                            print("Purchase declined.")
+                    elif currentUserInfo["accountType"] == "AA":
+                        confirmation = input("You are purchasing, " + ticketQuantity + " ticket(s) at the price of " + events[i,3] + " per ticket. Type 'yes' if this is correct.\n")
+                        if confirmation == "yes":
+                            events[i,2] = str( float(events[i,2]) - float(ticketQuantity))
+                            print("Thank you for your purchase.")
+                            transaction = str(code + eventName.ljust(19) + (events[i,1]).ljust(16) + '{:0>3}'.format(ticketQuantity) + " " + '{:0>9}'.format(events[i, 3]))
+                            dailyTransactions = np.append(dailyTransactions, transaction)
+                        else:
+                            print("Purchase declined.")
+                    else:
+                        print("Max tickets you may purchase is 4")
                 else:
-                    print("Purchase declined.")
-            else:
-                print("Not enough tickets remaining.")
-        elif eventName == events[i,0] or sellerName == events[i,1]:
-            yes = 0
-            print("Error: Invalid seller name.")
-    
-    if yes > 0:
-        print("Error: Invalid event or seller name.")
+                    print("Not enough tickets remaining.")
+            elif eventName == events[i,0] or sellerName == events[i,1]:
+                yes = 0
+                print("Error: Invalid seller name.")
+        if yes > 0:
+            print("Error: Invalid event or seller name.")
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():

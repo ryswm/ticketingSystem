@@ -20,7 +20,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-Your account type cannot purchase tickets.
+Sellers can not buy
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -42,4 +42,3 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-
