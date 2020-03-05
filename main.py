@@ -109,8 +109,11 @@ def logout():
     global currentLogin
     if currentLogin == True:
         currentLogin = False
-    print("You have successfully logged out")
-    writeTransactions()
+        print("You have successfully logged out")
+        writeTransactions()
+    else:
+        print("You must first login")
+    
     #TODO: Update currentuserinfo
 
     #TODO: End frontend session
@@ -270,7 +273,7 @@ def buy():
 
     if currentUserInfo["accountType"] == "SS":
         print("Sellers can not buy")
-    else:
+    elif currentLogin == True:
         eventName = input("Enter the name of the event you wish to purchase tickets to:\n")
         ticketQuantity = input("How many tickets would you like to buy?\n")
         sellerName = input("Please enter the name of the seller:\n")
@@ -311,6 +314,8 @@ def buy():
                 print("Error: Invalid seller name.")
         if yes > 0:
             print("Error: Invalid event or seller name.")
+    else:
+        print("Not logged in")
 
 #Triggers the main menu UI which displays the user options
 def mainMenu():
