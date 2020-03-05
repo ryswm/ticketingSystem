@@ -255,7 +255,7 @@ def sell():
         #TODO: Add checks for bad input
         #TODO: Update event array
     else:
-        print("Sorry, you must be logged in to sell tickets.")
+        print("Sorry, but you do not have permission to sell!")
 
 
 #This function allows a user to buy tickets to an existing event
