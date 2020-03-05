@@ -288,10 +288,9 @@ def buy():
                     print("Purchase declined.")
             else:
                 print("Not enough tickets remaining.")
-        elif eventName == events[i,0]:
+        elif eventName == events[i,0] or sellerName == events[i,1]:
+            yes = 0
             print("Error: Invalid seller name.")
-        elif sellerName == events[i,1]:
-            print("Error: Invalid event name.")
     
     if yes > 0:
         print("Error: Invalid event or seller name.")
