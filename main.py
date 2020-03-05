@@ -243,9 +243,9 @@ def sell():
     global currentUserInfo
     global dailyTransactions
     if currentLogin == True and currentUserInfo["accountType"] != "BS":
-        eventName = input("Enter the name of the event: ")
-        salePrice = input("Enter the sale price of each ticket: ")
-        ticketsAmount = input("Please enter the amount of tickets: ")
+        eventName = input("Enter the name of the event:\n")
+        salePrice = input("Enter the sale price of each ticket:\n")
+        ticketsAmount = input("Please enter the amount of tickets:\n")
 
         #TODO: Add checks for bad input
         #TODO: Update event array
@@ -265,9 +265,9 @@ def buy():
     global dailyTransactions
     global events
 
-    eventName = input("Enter the name of the event you wish to purchase tickets to: ")
-    ticketQuantity = input("How many tickets would you like to buy? ")
-    sellerName = input("Please enter the name of the seller: ")
+    eventName = input("Enter the name of the event you wish to purchase tickets to:\n")
+    ticketQuantity = input("How many tickets would you like to buy?\n")
+    sellerName = input("Please enter the name of the seller:\n")
     
     for i in range(len(events)):
         if eventName == events[i,0] and sellerName == events[i,1]:
