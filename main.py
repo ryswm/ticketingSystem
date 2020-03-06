@@ -166,7 +166,7 @@ def addCredit():
     global users
     global dailyTransactions
     global currentUserInfo
-
+    global creditedTotal
     if currentLogin == True and currentUserInfo["accountType"] == "AA":
         user = input("Enter the name of user to add credit to: \n")
         amount = input("Enter the amount of credit to add: \n")
@@ -176,20 +176,24 @@ def addCredit():
                 #TODO: Add check against previous addcredit this session
 
                 if value <= 1000 and value > 0:  # Check if desired credit ammount is within daily add limit
-                    # Iterate through usernames
-                    for i in range(len(users[:, :])):
-                        if users[i, 0] == user:
-                            # Credit stored as string, must convert to manipulate
-                            userCredit = float(users[i, 2])
-                            userCredit += value
-                            # Format and reassign to users array
-                            users[i, 2] = str("{:.2f}".format(userCredit))
-                            print("Credit added to " + user)
+                    if (creditedTotal + value) < 1000:
+                        # Iterate through usernames
+                        for i in range(len(users[:, :])):
+                            if users[i, 0] == user:
+                                # Credit stored as string, must convert to manipulate
+                                userCredit = float(users[i, 2])
+                                userCredit += value
+                                # Format and reassign to users array
+                                users[i, 2] = str("{:.2f}".format(userCredit))
+                                print("Credit added to " + user)
 
-                            transaction = str(
-                                code + user.ljust(15) + " " + users[i, 1] + " " + '{:0>9}'.format(users[i, 2]))
-                            dailyTransactions = np.append(
-                                dailyTransactions, transaction)
+                                transaction = str(
+                                    code + user.ljust(15) + " " + users[i, 1] + " " + '{:0>9}'.format(users[i, 2]))
+                                dailyTransactions = np.append(
+                                    dailyTransactions, transaction)
+                                creditedTotal = creditedTotal + value
+                    else:
+                        print("Amount credited in one session cannot exceed 1000.")
                 else:
                     print("Amount of credit cannot exceed 1000 and cannot be negative.")
             else:
@@ -468,7 +472,7 @@ currentUserInfo = {             #Dictionary of logged in user details
     "accountType":"",
     "credit":""
 }
-
+creditedTotal = 0
 if len(sys.argv) < 3:
     AccountF = "AccountFile.txt"
     EventF = "eventFile.txt"
