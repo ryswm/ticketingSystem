@@ -22,8 +22,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  9. quit
 Enter the name of the event:
 Enter the sale price of each ticket:
-Please enter the amount of tickets:
-Ticket price must be a number!
+Sorry, one of those was not a number
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 

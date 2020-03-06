@@ -248,15 +248,27 @@ def sell():
     global dailyTransactions
     if currentLogin == True and currentUserInfo["accountType"] != "BS":
         eventName = input("Enter the name of the event:\n")
-        salePrice = input("Enter the sale price of each ticket:\n")
-        ticketsAmount = input("Please enter the amount of tickets:\n")
-
-        if eventName == "" or salePrice == "" or ticketsAmount == "":
-                print("There can be no empty fields!")
+        if type(eventName) != str:
+            print("Must be a string")
+        elif eventName in events:
+            print("Event already exists")
         else:
-                transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(16) + '{:0>3}'.format(ticketsAmount) + " " + '{:0>9}'.format(salePrice))
-                dailyTransactions = np.append(dailyTransactions, transaction)
-        #TODO: Add checks for bad input
+            try:
+                salePrice = float(input("Enter the sale price of each ticket:\n"))
+                ticketsAmount = int(input("Please enter the amount of tickets:\n"))
+
+                if eventName == "" or salePrice == "" or ticketsAmount == "":
+                    print("There can be no empty fields!")
+                elif len(eventName) > 15 or float(salePrice) > 999.99 or float(salePrice) <= 0 or int(ticketsAmount) > 100 or int(ticketsAmount) <= 0:
+                    print("Improper input")
+                else:
+                    transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(16) + '{:0>3}'.format(ticketsAmount) + " " + '{:0>9}'.format(salePrice))
+                    dailyTransactions = np.append(dailyTransactions, transaction)
+            except ValueError:
+                print("Sorry, one of those was not a number")
+
+            
+
         #TODO: Update event array
     else:
         print("Sorry, but you do not have permission to sell!")
