@@ -22,7 +22,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  9. quit
 Enter the name of user to add credit to: 
 Enter the amount of credit to add: 
-Amount of credit cannot exceed 1000.
+Amount of credit cannot exceed 1000 and cannot be negative.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 

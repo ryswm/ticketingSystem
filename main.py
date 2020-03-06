@@ -175,7 +175,7 @@ def addCredit():
             if user in users:  # Check if selected user is a real account
                 #TODO: Add check against previous addcredit this session
 
-                if value <= 1000 | value > 0:  # Check if desired credit ammount is within daily add limit
+                if value <= 1000 and value > 0:  # Check if desired credit ammount is within daily add limit
                     # Iterate through usernames
                     for i in range(len(users[:, :])):
                         if users[i, 0] == user:
