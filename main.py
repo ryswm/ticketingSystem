@@ -79,11 +79,11 @@ def createUser():
             dailyTransactions = np.append(dailyTransactions,transaction)
             userAdded = False
     elif currentUserInfo["accountType"] == "BS" and currentLogin == True:
-            print("Must be an admin to create an account")
+            print("Must be an admin to create an account.")
     elif currentUserInfo["accountType"] == "FS" and currentLogin == True:
-            print("Must be an admin to create an account")
+            print("Must be an admin to create an account.")
     elif currentUserInfo["accountType"] == "SS" and currentLogin == True:
-            print("Must be an admin to create an account")
+            print("Must be an admin to create an account.")
     else:
         if currentLogin == False:
             print("Please login!")
