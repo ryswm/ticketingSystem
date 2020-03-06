@@ -20,10 +20,9 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-Enter the name of user to add credit to:
-
-Sorry but that is not a valid option
-
+Enter the name of user to add credit to: 
+Enter the amount of credit to add: 
+User does not exist in the system.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
