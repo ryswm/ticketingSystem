@@ -117,9 +117,11 @@ def login():
 def logout():
     code = "00"
     global currentLogin
+    global logo
     if currentLogin == True:
         currentLogin = False
         print("You have successfully logged out")
+        logo = 2
         writeTransactions()
     else:
         print("You must first login")
@@ -144,13 +146,13 @@ def delete():
         elif deleteUser in users:                     #If selected user is real account
             for i in range(len(users) - 1):           
                 if users[i,0] == deleteUser:
-                    users = np.delete(users, i, 0) #Delete user from users array
+                   
                     #TODO: Erase events with this user as seller
                     credit = float(users[i,2]) #Format users credit for transaction line
                     credit = '{:0>9}'.format(str("{:.2f}".format(credit)))
-
                     transaction = str(code + deleteUser.ljust(15) + " " + users[i,1] + " " + credit) #Add transaction to daily transactions list
                     dailyTransactions = np.append(dailyTransactions,transaction)
+                    users = np.delete(users, i, 0) #Delete user from users array
             print("Successfully deleted the user," + deleteUser + " \n -------------------------------")
         elif deleteUser not in users:               #If selected user is not real account
             print("User does not exist in the system.") 
@@ -287,10 +289,10 @@ def sell():
 
                 if eventName == "" or salePrice == "" or ticketsAmount == "":
                     print("There can be no empty fields!")
-                elif len(eventName) > 15 or float(salePrice) > 999.99 or float(salePrice) <= 0 or int(ticketsAmount) > 100 or int(ticketsAmount) <= 0:
+                elif len(eventName) > 18 or float(salePrice) > 999.99 or float(salePrice) <= 0 or int(ticketsAmount) > 100 or int(ticketsAmount) <= 0:
                     print("Improper input")
                 else:
-                    transaction = str(code + eventName.ljust(19) + (currentUserInfo["username"]).ljust(16) + '{:0>3}'.format(ticketsAmount) + " " + '{:0>9}'.format(salePrice))
+                    transaction = str(code + eventName.ljust(18) + " " + (currentUserInfo["username"]).ljust(16) + '{:0>3}'.format(ticketsAmount) + " " + '{:0>9}'.format(salePrice))
                     dailyTransactions = np.append(dailyTransactions, transaction)
             except ValueError:
                 print("Sorry, one of those was not a number")
@@ -424,6 +426,7 @@ def readEvents():
 def writeTransactions():        
     global currentUserInfo
     global dailyTransactions
+    global logo
 
     user = currentUserInfo["username"]
     type = currentUserInfo["accountType"]
@@ -433,11 +436,14 @@ def writeTransactions():
     f = open(os.getcwd()+TransactionF, "w+")
     for i in range(len(dailyTransactions)):
         f.write(dailyTransactions[i] + "\n")
-    f.write(endLine)
+    if logo == 2:
+        f.write(endLine)
     f.close()
+    logo = 1
 
 
 #Global variables
+logo = 1
 run = True                      #Ensures main program keeps running
 currentLogin = False            #Signifies if user is logged in
 dailyTransactions = []          #List of transactions during session
