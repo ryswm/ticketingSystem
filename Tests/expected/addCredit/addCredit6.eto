@@ -35,7 +35,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  9. quit
 Enter the name of user to add credit to: 
 Enter the amount of credit to add: 
-Total amount credited cannot exceed 1000 in one session.
+Amount credited in one session cannot exceed 1000.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
