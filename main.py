@@ -171,17 +171,17 @@ def addCredit():
         user = input("Enter the name of user to add credit to: \n")
         amount = input("Enter the amount of credit to add: \n")
         if user != "" and amount != "":
-            int(amount)
+            value = int(amount)
             if user in users:  # Check if selected user is a real account
                 #TODO: Add check against previous addcredit this session
 
-                if int(amount) <= 1000:  # Check if desired credit ammount is within daily add limit
+                if value <= 1000:  # Check if desired credit ammount is within daily add limit
                     # Iterate through usernames
                     for i in range(len(users[:, :])):
                         if users[i, 0] == user:
                             # Credit stored as string, must convert to manipulate
                             userCredit = float(users[i, 2])
-                            userCredit += amount
+                            userCredit += value
                             # Format and reassign to users array
                             users[i, 2] = str("{:.2f}".format(userCredit))
                             print("Credit added to " + user)
