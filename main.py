@@ -210,29 +210,39 @@ def refund():
 
                     refund = int(input("Please enter refund amount. \n"))
                     if(refund <= 999999) and (refund > 0):
-
+                        
+                        
                 #TODO: Check that adding the refund to account doesn't exceed credit limit 999999
                         
+
                         seller = input("Please enter seller's account name. \n")
-                        if seller in users:
-                            for j in range(len(users)):
-                                if users[j,0] == seller:
-                                    credit = str("{:.2f}".format(refund))
-                                    buyerCredit += float(refund)
-                                    users[i, 2] = str("{:.2f}".format(buyerCredit))
-                                    print(buyer + " has been refunded")
-                                    print(buyer + " now has " + users[i, 2] + " in their account")
+                        if (buyerCredit + refund) <= 999999:
+                            if seller in users:
+                                for j in range(len(users)):
+                                    if users[j,0] == seller:
+                                        if float(users[j,2]) > refund:
+                                            credit = str("{:.2f}".format(refund))
+                                            buyerCredit += float(refund)
+                                            users[i, 2] = str("{:.2f}".format(buyerCredit))
+                                            print(buyer + " has been refunded")
+                                            print(buyer + " now has " + users[i, 2] + " in their account")
 
-                                    sellerCredit = float(users[j,2])
-                                    sellerCredit -= float(refund)
-                                    users[j, 2] = str("{:.2f}".format(sellerCredit))
-                                    print(seller + " has been debited")
-                                    print(seller + " now has " + users[j, 2] + " in their account")
+                                            sellerCredit = float(users[j,2])
+                                            sellerCredit -= float(refund)
+                                            users[j, 2] = str("{:.2f}".format(sellerCredit))
+                                            print(seller + " has been debited")
+                                            print(seller + " now has " + users[j, 2] + " in their account")
 
-                                    transaction = str(code + buyer.ljust(15) + seller.ljust(15) + '{:0>9}'.format(credit))
-                                    dailyTransactions = np.append(dailyTransactions, transaction)
+                                            transaction = str(code + buyer.ljust(15) + seller.ljust(15) + '{:0>9}'.format(credit))
+                                            dailyTransactions = np.append(dailyTransactions, transaction)
+                                        else:
+                                            print("Seller does not have enough credit to refund buyer!")
+                            else:
+                                print("Seller does not exist!")
                         else:
-                            print("Seller does not exist!")
+                            print("Buyer has an amount of credit that would be greater than 999,999 after refund completes!")
+                    elif refund < 0:
+                        print("Refund cannot be a negative number!")
                     else:
                         print("Refund exceeds the maximum amount")
         else:
