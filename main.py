@@ -167,12 +167,12 @@ def addCredit():
 
     if currentLogin == True and currentUserInfo["accountType"] == "AA":
         user = input("Enter the name of user to add credit to: \n")
-        amount = int(input("Enter the amount of credit to add: \n"))
-        if len(user) > 0 and amount > 0:
+        amount = input("Enter the amount of credit to add: \n")
+        if type(user) == str and type(amount) == int:
             if user in users:  # Check if selected user is a real account
                 #TODO: Add check against previous addcredit this session
 
-                if amount <= 1000:  # Check if desired credit ammount is within daily add limit
+                if int(amount) <= 1000:  # Check if desired credit ammount is within daily add limit
                     # Iterate through usernames
                     for i in range(len(users[:, :])):
                         if users[i, 0] == user:
@@ -196,19 +196,28 @@ def addCredit():
 
         #TODO: Add check against previous addcredit this session
 
-        if amount <= 1000:  # Check if desired credit ammount is within daily add limit
-            for i in range(len(users[:, :])):  # Iterate through usernames
-                if users[i, 0] == currentUserInfo["username"]:
-                    userCredit = float(users[i, 2])  # Credit stored as string, must convert to manipulate
-                    userCredit += amount
-                    users[i, 2] = str("{:.2f}".format(userCredit))  # Format and reassign to users array
-                    currentUserInfo["username"] = str(
-                        "{:.2f}".format(userCredit))
-                    print("Credit added to " + currentUserInfo["username"])
+        amount = int(input("Enter the amount of credit to add: \n"))
+        if amount > 0:
+            if user in users:  # Check if selected user is a real account
+                #TODO: Add check against previous addcredit this session
 
-                    transaction = str(code + currentUserInfo["username"].ljust(15) + " " + users[i, 1] + " " + '{:0>9}'.format(users[i, 2]))
-                    dailyTransactions = np.append(
-                        dailyTransactions, transaction)
+                if amount <= 1000:  # Check if desired credit ammount is within daily add limit
+                    # Iterate through usernames
+                    for i in range(len(users[:, :])):
+                        if users[i, 0] == user:
+                            # Credit stored as string, must convert to manipulate
+                            userCredit = float(users[i, 2])
+                            userCredit += amount
+                            # Format and reassign to users array
+                            users[i, 2] = str("{:.2f}".format(userCredit))
+                            print("Credit added to " + user)
+
+                            transaction = str(
+                                code + user.ljust(15) + " " + users[i, 1] + " " + '{:0>9}'.format(users[i, 2]))
+                            dailyTransactions = np.append(
+                                dailyTransactions, transaction)
+        else:
+            print("Username and/or credit cannot be blank.")
     else:
         print("Sorry, you must be logged in to use this function.")
 

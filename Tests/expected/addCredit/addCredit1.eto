@@ -20,8 +20,8 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-Enter the name of user to add credit to:
-Enter the amount of credit to add:
+Enter the name of user to add credit to: 
+Enter the amount of credit to add: 
 Username and/or credit cannot be blank.
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
