@@ -167,8 +167,8 @@ def addCredit():
 
     if currentLogin == True and currentUserInfo["accountType"] == "AA":
         user = input("Enter the name of user to add credit to: \n")
-        amount = input("Enter the amount of credit to add: \n")
-        if type(user) == str and type(amount) == int:
+        amount = int(input("Enter the amount of credit to add: \n"))
+        if type(user) == str and amount > 0:
             if user in users:  # Check if selected user is a real account
                 #TODO: Add check against previous addcredit this session
 
@@ -187,6 +187,10 @@ def addCredit():
                                 code + user.ljust(15) + " " + users[i, 1] + " " + '{:0>9}'.format(users[i, 2]))
                             dailyTransactions = np.append(
                                 dailyTransactions, transaction)
+                else:
+                    print("Amount of credit cannot exceed 1000.")
+            else:
+                print("User does not exist in the system.")
         else:
             print("Username and/or credit cannot be blank.")
 
