@@ -398,7 +398,7 @@ def mainMenu():
        global run
        run = False
     elif selection == "r":
-        print(events)
+        print(users)
     else:
         print("\nSorry but that is not a valid option\n")
 
