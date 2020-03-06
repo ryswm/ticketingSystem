@@ -169,8 +169,9 @@ def addCredit():
 
     if currentLogin == True and currentUserInfo["accountType"] == "AA":
         user = input("Enter the name of user to add credit to: \n")
-        amount = int(input("Enter the amount of credit to add: \n"))
-        if type(user) == str and amount > 0:
+        amount = input("Enter the amount of credit to add: \n")
+        if user != "" and amount != "":
+            int(amount)
             if user in users:  # Check if selected user is a real account
                 #TODO: Add check against previous addcredit this session
 
