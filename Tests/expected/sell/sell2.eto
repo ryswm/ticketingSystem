@@ -23,7 +23,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
 Enter the name of the event:
 Enter the sale price of each ticket:
 Please enter the amount of tickets:
-Event title too long!
+Improper input
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
@@ -45,4 +45,3 @@ Welcome to the Tix ticketing system, please enter one of the following options.
  7. refund 
  8. addcredit 
  9. quit
-

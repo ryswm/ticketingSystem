@@ -23,7 +23,7 @@ Welcome to the Tix ticketing system, please enter one of the following options.
 Enter the name of the event:
 Enter the sale price of each ticket:
 Please enter the amount of tickets:
-Amount of tickets cannot exceed 100!
+Improper input
 Welcome to the Tix ticketing system, please enter one of the following options.
  1. create 
  2. login 
