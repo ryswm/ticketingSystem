@@ -14,30 +14,45 @@ public class Backend {
     
     
   public static void readFiles() throws FileNotFoundException{
-    //TODO file not found should be fatal to the backend
-
-    //Open and Read 3 Input Files
-    File dt = new File(System.getProperty("user.dir") + "/transactionFile.txt"); // Daily Transaction File
-    Scanner sc = new Scanner(dt); 
-    File accountsFile = new File(System.getProperty("user.dir") + "/AccountFile.txt"); // Accounts File
-    Scanner sc2 = new Scanner(accountsFile);
-    File ticketsFile = new File(System.getProperty("user.dir") + "/eventFile.txt");
-    Scanner sc3 = new Scanner(ticketsFile);
-    
-    //Read Daily Transaction file
-    while (sc.hasNextLine()){
-      //System.out.println(sc.nextLine());
-      transactions.add(sc.nextLine());
+    //TODO Proper fatal error reporting to terminal (currently reports java error type without any parsing)
+    /*
+      Open and Read 3 Input Files
+    */
+    //Open and read transaction file
+    try{
+      File dt = new File(System.getProperty("user.dir") + "/transactionFiles.txt"); // Daily Transaction File
+      Scanner sc = new Scanner(dt); 
+      while (sc.hasNextLine()){
+        //System.out.println(sc.nextLine());
+        transactions.add(sc.nextLine());
+      }
+    } catch (Exception e){
+      System.out.println(e);
+      System.exit(0);
     }
-    //Read Accounts file
-    while (sc2.hasNextLine()){ 
-      //System.out.println(sc.nextLine());
-      accounts.add(sc2.nextLine());
+    //Open and read account file
+    try{
+      File accountsFile = new File(System.getProperty("user.dir") + "/AccountFiles.txt"); // Accounts File
+      Scanner sc2 = new Scanner(accountsFile);
+      while (sc2.hasNextLine()){ 
+        //System.out.println(sc.nextLine());
+        accounts.add(sc2.nextLine());
+      }
+    } catch (Exception e){
+      System.out.println(e);
+      System.exit(0);
     }
-    //Read Events file
-    while (sc3.hasNextLine()){ 
-      //System.out.println(sc.nextLine());
-      tickets.add(sc3.nextLine());
+    //Open and read event file
+    try{
+      File ticketsFile = new File(System.getProperty("user.dir") + "/eventFiles.txt");
+      Scanner sc3 = new Scanner(ticketsFile);
+      while (sc3.hasNextLine()){ 
+        //System.out.println(sc.nextLine());
+        tickets.add(sc3.nextLine());
+      }
+    } catch (Exception e){
+      System.out.println(e);
+      System.exit(0);
     }
 
     //Print Arrays after reading
