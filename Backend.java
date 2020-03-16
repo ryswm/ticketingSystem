@@ -15,6 +15,8 @@ public class Backend {
     
   public static void readFiles() throws FileNotFoundException{
     //TODO Proper fatal error reporting to terminal (currently reports java error type without any parsing)
+    //TODO Read daily transaction file an split at each logout so we know current user
+
     /*
       Open and Read 3 Input Files
     */
@@ -26,6 +28,7 @@ public class Backend {
         //System.out.println(sc.nextLine());
         transactions.add(sc.nextLine());
       }
+      sc.close();
     } catch (Exception e){
       System.out.println(e);
       System.exit(0);
@@ -38,6 +41,7 @@ public class Backend {
         //System.out.println(sc.nextLine());
         accounts.add(sc2.nextLine());
       }
+      sc2.close();
     } catch (Exception e){
       System.out.println(e);
       System.exit(0);
@@ -50,6 +54,7 @@ public class Backend {
         //System.out.println(sc.nextLine());
         tickets.add(sc3.nextLine());
       }
+      sc3.close();
     } catch (Exception e){
       System.out.println(e);
       System.exit(0);
