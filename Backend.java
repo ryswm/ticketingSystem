@@ -13,29 +13,34 @@ public class Backend {
   static ArrayList<String> tickets = new ArrayList<String>();
     
     
-  public Backend() throws FileNotFoundException{
-    System.out.println(System.getProperty("user.dir"));
+  public static void readFiles() throws FileNotFoundException{
+    //TODO file not found should be fatal to the backend
+
+    //Open and Read 3 Input Files
     File dt = new File(System.getProperty("user.dir") + "/transactionFile.txt"); // Daily Transaction File
     Scanner sc = new Scanner(dt); 
-        
     File accountsFile = new File(System.getProperty("user.dir") + "/AccountFile.txt"); // Accounts File
     Scanner sc2 = new Scanner(accountsFile);
-        
     File ticketsFile = new File(System.getProperty("user.dir") + "/eventFile.txt");
     Scanner sc3 = new Scanner(ticketsFile);
-        
-    while (sc.hasNextLine()){ 
+    
+    //Read Daily Transaction file
+    while (sc.hasNextLine()){
       //System.out.println(sc.nextLine());
       transactions.add(sc.nextLine());
     }
+    //Read Accounts file
     while (sc2.hasNextLine()){ 
       //System.out.println(sc.nextLine());
-      accounts.add(sc.nextLine());
+      accounts.add(sc2.nextLine());
     }
+    //Read Events file
     while (sc3.hasNextLine()){ 
       //System.out.println(sc.nextLine());
-      tickets.add(sc.nextLine());
+      tickets.add(sc3.nextLine());
     }
+
+    //Print Arrays after reading
     System.out.println(transactions);
     System.out.println(tickets);
     System.out.println(accounts);
@@ -53,7 +58,12 @@ public class Backend {
   }
     
   public static void main(String[] args) throws FileNotFoundException {
-    Backend backend = new Backend();
+    readFiles();  //Read the 3 input files
+
+
+    //TODO handle all transactions from daily transactions file
+
+    //TODO write 2 output files (new events + new accounts)
       
     for (String transaction : transactions) {
       if(transaction.startsWith("01")){
