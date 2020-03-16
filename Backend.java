@@ -61,24 +61,42 @@ public class Backend {
     System.out.println(accounts);
         
   } 
+
+  public void writeFiles(){
+
+  }
     
   public static void createUser(){
-        
         
   }
     
   public static void deleteUser(){
         
-        
+  }
+
+  public void refundUser(){
+
+  }
+
+  public void createEvent(){
+
+  }
+
+  public void buyTicket(){
+
+  }
+
+  public void addCredit(){
+
   }
     
   public static void main(String[] args) throws FileNotFoundException {
     readFiles();  //Read the 3 input files
 
 
-    //TODO handle all transactions from daily transactions file
+    //TODO handle all transactions from daily transactions file (fill out methods)
 
-    //TODO write 2 output files (new events + new accounts)
+    //TODO write 2 output files (new events + new accounts; fill out method)
       
     for (String transaction : transactions) {
       if(transaction.startsWith("01")){
