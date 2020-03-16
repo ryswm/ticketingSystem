@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Backend {
+public class Backend1 {
 
   /**
    * @param args the command line arguments
@@ -13,7 +13,7 @@ public class Backend {
   static ArrayList<String> tickets = new ArrayList<String>();
     
     
-  public Backend() throws FileNotFoundException{
+  public Backend1() throws FileNotFoundException{
     System.out.println(System.getProperty("user.dir"));
     File dt = new File(System.getProperty("user.dir") + "/transactionFile.txt"); // Daily Transaction File
     Scanner sc = new Scanner(dt); 
@@ -53,7 +53,7 @@ public class Backend {
   }
     
   public static void main(String[] args) throws FileNotFoundException {
-    Backend backend = new Backend();
+    Backend1 backend = new Backend1();
       
     for (String transaction : transactions) {
       if(transaction.startsWith("01")){
