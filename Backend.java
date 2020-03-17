@@ -1,5 +1,7 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,8 +73,30 @@ public class Backend {
 
   }
     
-  public static void createUser(){
-        
+  public static void createUser(String transaction) throws FileNotFoundException{
+    // split up the transaction string into substrings by whitespace
+    String[] split = transaction.split("\\s+");
+    /* First string is not used to create user, since its the code 01,
+      split[1] is username
+      split[2] is account type
+      split[3] is credit
+    */
+    try{
+      BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + "/AccountFiles.txt", true));
+      writer.write(split[1]);
+      for(int i = 0; i < (16 - split[1].length()); i++){ // Adding amount of whitespace needed to have proper formatting.
+        writer.write(" ");
+      }
+      writer.write(split[2] + " " + split[3]);
+      writer.newLine();
+      writer.close();  
+    }
+    catch(Exception e){
+      System.out.println(e);
+      System.exit(0);
+    }
+    
+    
   }
     
   public static void deleteUser(){
@@ -97,7 +121,7 @@ public class Backend {
     
   public static void main(String[] args) throws FileNotFoundException {
     readFiles();  //Read the 3 input files
-
+    
 
     //TODO handle all transactions from daily transactions file (fill out methods)
 
@@ -106,7 +130,7 @@ public class Backend {
     for (String transaction : transactions) {
       if(transaction.startsWith("01")){
         System.out.println("Transaction file says code 01, create a user.");
-			  //backend.createUser(name,type,credit);
+			  createUser(transaction);
       }   
     }
   }
