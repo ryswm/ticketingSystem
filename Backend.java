@@ -98,6 +98,10 @@ public class Backend {
   public static void main(String[] args) throws FileNotFoundException {
     readFiles();  //Read the 3 input files
 
+    for (String transaction : transactions){
+      
+    }
+
 
     //TODO handle all transactions from daily transactions file (fill out methods)
 
@@ -106,8 +110,28 @@ public class Backend {
     for (String transaction : transactions) {
       if(transaction.startsWith("01")){
         System.out.println("Transaction file says code 01, create a user.");
-			  //backend.createUser(name,type,credit);
-      }   
+			  createUser();
+      }
+      else if(transaction.startsWith("02")){
+        System.out.println("Transaction file says code 01, create a user.");
+			  createUser();
+      }
+      else if(transaction.startsWith("03")){
+        System.out.println("Transaction file says code 01, create a user.");
+			  createUser();
+      }
+      else if(transaction.startsWith("04")){
+        System.out.println("Transaction file says code 01, create a user.");
+			  createUser();
+      }
+      else if(transaction.startsWith("05")){
+        System.out.println("Transaction file says code 01, create a user.");
+			  createUser();
+      }
+      else if(transaction.startsWith("06")){
+        System.out.println("Transaction file says code 01, create a user.");
+			  createUser();
+      }      
     }
   }
 }
