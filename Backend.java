@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Backend {
-
   /**
    * @param args the command line arguments
-   */
+   **/
+
+
+
   //Lines read from files
   static ArrayList<String> transactions = new ArrayList<String>();
   static ArrayList<String> accounts = new ArrayList<String>();
@@ -18,9 +20,8 @@ public class Backend {
   //Current users
   static ArrayList<String> sessionUsers = new ArrayList<String>();
 
-  //Event names
+  //Event & account names
   static ArrayList<String> eventNames = new ArrayList<String>();
-  //All account names
   static ArrayList<String> users = new ArrayList<String>();
   
 
