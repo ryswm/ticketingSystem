@@ -177,33 +177,32 @@ public class Backend {
             }
             else if(newBalance.length() == 6)
             {
-              newBalance = "00" + newBalance;
+              newBalance = "000" + newBalance;
             }
             else if(newBalance.length() == 5)
             {
-              newBalance = "00" + newBalance;
+              newBalance = "0000" + newBalance;
             }
             else if(newBalance.length() == 4)
             {
-              newBalance = "00" + newBalance;
+              newBalance = "00000" + newBalance;
             }
             else if(newBalance.length() == 3)
             {
-              newBalance = "00" + newBalance;
+              newBalance = "000000" + newBalance;
             }
             else if(newBalance.length() == 2)
             {
-              newBalance = "00" + newBalance;
+              newBalance = "0000000" + newBalance;
             }
             else if(newBalance.length() == 1)
             {
-              newBalance = "00" + newBalance;
+              newBalance = "00000000" + newBalance;
             }
             else if(newBalance.length() == 0)
             {
               newBalance = "000000000" + newBalance;
             }
-
 
             updatedBuyer.substring(22,31).replace(creditTemp, newBalance);
             accounts.remove(buyerName);
