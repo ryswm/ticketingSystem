@@ -152,14 +152,14 @@ public class Backend {
   public static void refundUser(String transaction){
         String buyer = transaction.substring(3, 18).trim();
         String seller = transaction.substring(19,34).trim();
-        int refundTemp = Integer.parseInt(transaction.substring(35,44).trim());
+        double refundTemp = Double.parseDouble(transaction.substring(35,44).trim());
 
         for(String buyerName : accounts){
           if(buyerName.substring(3,18) == buyer){
             String updatedBuyer = buyerName.substring(0,31);
 
             String creditTemp = updatedBuyer.substring(22,31);
-            int newBalanceTemp = Integer.parseInt(updatedBuyer.substring(22,31));
+            double newBalanceTemp = Double.parseDouble(updatedBuyer.substring(22,31));
             newBalanceTemp += refundTemp;
             String newBalance = String.valueOf(newBalanceTemp);
 
