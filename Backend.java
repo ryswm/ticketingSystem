@@ -10,10 +10,21 @@ public class Backend {
   /**
    * @param args the command line arguments
    */
+  //Lines read from files
   static ArrayList<String> transactions = new ArrayList<String>();
   static ArrayList<String> accounts = new ArrayList<String>();
   static ArrayList<String> tickets = new ArrayList<String>();
-    
+
+  //Current users
+  static ArrayList<String> sessionUsers = new ArrayList<String>();
+
+  //Event names
+  static ArrayList<String> eventNames = new ArrayList<String>();
+  //All account names
+  static ArrayList<String> users = new ArrayList<String>();
+  
+
+  //------------------------ Read & Write functions
     
   public static void readFiles() throws FileNotFoundException{
     //TODO Proper fatal error reporting to terminal (currently reports java error type without any parsing)
@@ -23,7 +34,7 @@ public class Backend {
     */
     //Open and read transaction file
     try{
-      File dt = new File(System.getProperty("user.dir") + "/transactionFiles.txt"); // Daily Transaction File
+      File dt = new File(System.getProperty("user.dir") + "/transactionFile.txt"); // Daily Transaction File
       Scanner sc = new Scanner(dt); 
       while (sc.hasNextLine()){
         //System.out.println(sc.nextLine());
@@ -36,7 +47,7 @@ public class Backend {
     }
     //Open and read account file
     try{
-      File accountsFile = new File(System.getProperty("user.dir") + "/AccountFiles.txt"); // Accounts File
+      File accountsFile = new File(System.getProperty("user.dir") + "/AccountFile.txt"); // Accounts File
       Scanner sc2 = new Scanner(accountsFile);
       while (sc2.hasNextLine()){ 
         //System.out.println(sc.nextLine());
@@ -49,7 +60,7 @@ public class Backend {
     }
     //Open and read event file
     try{
-      File ticketsFile = new File(System.getProperty("user.dir") + "/eventFiles.txt");
+      File ticketsFile = new File(System.getProperty("user.dir") + "/eventFile.txt");
       Scanner sc3 = new Scanner(ticketsFile);
       while (sc3.hasNextLine()){ 
         //System.out.println(sc.nextLine());
@@ -65,13 +76,41 @@ public class Backend {
     System.out.println(transactions);
     System.out.println(tickets);
     System.out.println(accounts);
-        
+
+    //Get event and user names
+    getEventNames();
+    getAccountNames();
   } 
 
-  public void writeFiles(){
+
+
+  public static void writeFiles(){
 
   }
-    
+
+  //-----------------
+
+
+
+  //----------------- Helper functions
+  
+  public static void getEventNames(){
+    for(String event : tickets){
+      eventNames.add(event.substring(3, 21).trim());
+    }
+  }
+
+  public static void getAccountNames(){
+    for(String account : accounts){
+      users.add(account.substring(3,18).trim());
+    }
+  }
+//----------------------
+
+
+
+
+//---------------------- Transaction functions
   public static void createUser(String transaction) throws FileNotFoundException{
     // split up the transaction string into substrings by whitespace
     String[] split = transaction.split("\\s+");
@@ -94,71 +133,87 @@ public class Backend {
       System.out.println(e);
       System.exit(0);
     }
-    
-    
   }
     
-  public static void deleteUser(){
-        
+  public static void deleteUser(String transaction){
+              String username = transaction.substring(3, 18).trim();
+              accounts.remove(username);
   }
 
-  public void refundUser(){
-
+  public static void refundUser(String transaction){
+        String buyer = transaction.substring(3, 18).trim();
+        String seller = transaction.substring(19,34).trim();
+        String refundCredit = transaction.substring(35,44).trim();
+        //find matching buyer / seller in accounts file and update the credit
+        String sellerCredit;
+        String buyerCredit;
   }
 
-  public void createEvent(){
+  public static void createEvent(String transaction){
+    String eventName = transaction.substring(3,21).trim();
+    String sellerName = transaction.substring(22,37).trim();
+    String tixQuantity = transaction.substring(38,41).trim();
+    String tixPrice = transaction.substring(42,48).trim();
 
-  }
-
-  public void buyTicket(){
-
-  }
-
-  public void addCredit(){
-
-  }
     
+  }
+
+  public static void buyTicket(String transaction)
+  {
+    String eventName = transaction.substring(3,21).trim();
+    String sellerName;
+  }
+
+  public static void addCredit(String transaction){
+
+  }
+  //------------------------------
+
+
+
+
+  //------------------------------  Main function
   public static void main(String[] args) throws FileNotFoundException {
+    int currentUser = 0; //First user is the first user in sessionUser
+
     readFiles();  //Read the 3 input files
 
-    //TODO Read daily transaction file an split at each logout so we know current user
+    //Find all logouts, make list of users from the day
     for (String transaction : transactions){
-      
+      if(transaction.startsWith("00")){
+        String username = transaction.substring(3, 18).trim();
+        sessionUsers.add(username);
+      }
     }
 
-    
 
-    //TODO handle all transactions from daily transactions file (fill out methods)
-
-    //TODO write 2 output files (new events + new accounts; fill out method)
-      
+    //TODO handle all transactions from daily transactions file (fill out methods)  
     for (String transaction : transactions) {
       if(transaction.startsWith("01")){
-        System.out.println("Transaction file says code 01, create a user.");
 			  createUser(transaction);
       }
       else if(transaction.startsWith("02")){
-        System.out.println("Transaction file says code 01, create a user.");
-			  createUser(transaction);
+			  deleteUser(transaction);
       }
       else if(transaction.startsWith("03")){
-        System.out.println("Transaction file says code 01, create a user.");
-			  createUser(transaction);
+        createEvent(transaction);
       }
       else if(transaction.startsWith("04")){
-        System.out.println("Transaction file says code 01, create a user.");
-			  createUser(transaction);
+			  buyTicket(transaction);
       }
       else if(transaction.startsWith("05")){
-        System.out.println("Transaction file says code 01, create a user.");
-			  createUser(transaction);
+			  refundUser(transaction);
       }
       else if(transaction.startsWith("06")){
-        System.out.println("Transaction file says code 01, create a user.");
-			  createUser(transaction);
-      }     
+        addCredit(transaction);
+      }
+      else if(transaction.startsWith("00")){
+        currentUser++; //Once user logsout, update current user (index of sessionUser)
+      }
     }
 
+    //TODO write 2 output files (new events + new accounts; fill out method)
+    writeFiles();
 
   }
 }
