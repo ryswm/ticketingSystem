@@ -73,9 +73,9 @@ public class Backend {
     }
 
     //Print Arrays after reading
-    System.out.println(transactions);
-    System.out.println(tickets);
-    System.out.println(accounts);
+    //System.out.println(transactions);
+    //System.out.println(tickets);
+    //System.out.println(accounts);
 
     //Get event and user names
     getEventNames();
@@ -96,13 +96,13 @@ public class Backend {
   
   public static void getEventNames(){
     for(String event : tickets){
-      eventNames.add(event.substring(3, 21).trim());
+      eventNames.add(event.substring(0, 18).trim());
     }
   }
 
   public static void getAccountNames(){
     for(String account : accounts){
-      users.add(account.substring(3,18).trim());
+      users.add(account.substring(0,15).trim());
     }
   }
 //----------------------
@@ -174,12 +174,32 @@ public class Backend {
   }
 
   public static void createEvent(String transaction){
+    Boolean add = true;
+
     String eventName = transaction.substring(3,21).trim();
     String sellerName = transaction.substring(22,37).trim();
-    String tixQuantity = transaction.substring(38,41).trim();
-    String tixPrice = transaction.substring(42,48).trim();
+    String tixQuantity = transaction.substring(38,41);
+    String tixPrice = transaction.substring(42,48);
 
-    
+    //Check for duplicates
+    for(String e : eventNames){
+      if(eventName.equals(e)){
+        add = false;
+        //TODO Print constraint error
+      }
+    }
+
+    //If no duplicates, add event
+    if(add == true){
+      eventNames.add(0, eventName); //Add to list of event names
+
+      String newEventName = String.format("%-18s",eventName); //Format event name
+      sellerName = String.format("%-15s",sellerName); //Format seller name
+      String newEvent = newEventName + " " + sellerName + " " + tixQuantity + " " + tixPrice; //Create string
+
+      tickets.add(0,newEvent);  //Add to list of events
+    }
+    System.out.println(tickets);
   }
 
   public static void buyTicket(String transaction)
