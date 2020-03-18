@@ -128,20 +128,15 @@ public class Backend {
       split[2] is account type
       split[3] is credit
     */
-    try{
-      BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + "/AccountFiles.txt", true));
-      writer.write(split[1]);
-      for(int i = 0; i < (16 - split[1].length()); i++){ // Adding amount of whitespace needed to have proper formatting.
-        writer.write(" ");
-      }
-      writer.write(split[2] + " " + split[3]);
-      writer.newLine();
-      writer.close();  
+    String account = split[1];
+    
+    for(int i = 0; i < (16 - split[1].length()); i++){ // Adding amount of whitespace needed to have proper formatting.
+      account += " ";
     }
-    catch(Exception e){
-      System.out.println(e);
-      System.exit(0);
-    }
+    account += split[2] + " " + split[3];
+    System.out.println(account);
+    accounts.add(account);
+    System.out.println(accounts);
   }
     
   public static void deleteUser(String transaction){
@@ -212,7 +207,7 @@ public class Backend {
 
         for(String sellerName : accounts){
           if(sellerName.substring(3,18) == seller){
-      
+            
           }
         }
         
@@ -256,6 +251,32 @@ public class Backend {
   }
 
   public static void addCredit(String transaction){
+    // Split up the transaction string into substrings by whitespace
+    String[] split = transaction.split("\\s+");
+    int index;
+    double newCredit;
+    String updatedAccount;
+    for(String account : accounts){
+
+        if(account.substring(0, 15).contains(split[1])){ // if user from transaction matches a user in accounts
+          index = accounts.indexOf(account);
+          String[] accountSplit = account.split("\\s+");
+          
+          newCredit = Double.parseDouble(accountSplit[2]) + Double.parseDouble(split[3]);
+          accountSplit[2] = Double.toString(newCredit);
+          updatedAccount = accountSplit[0];
+          for(int i = 0; i < (16 - accountSplit[1].length()); i++){ // Sorry for nested for loops 
+            updatedAccount += " ";
+          }
+          updatedAccount += accountSplit[1] + " " + accountSplit[2];
+
+          accounts.set(index, updatedAccount);
+          System.out.println(updatedAccount);
+          System.out.println(accounts);
+
+        }
+
+    }
 
   }
 
