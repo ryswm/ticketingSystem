@@ -203,7 +203,6 @@ public class Backend {
             {
               newBalance = "000000000" + newBalance;
             }
-
             updatedBuyer.substring(22,31).replace(creditTemp, newBalance);
             accounts.remove(buyerName);
             accounts.add(updatedBuyer);
@@ -212,12 +211,57 @@ public class Backend {
 
         for(String sellerName : accounts){
           if(sellerName.substring(3,18) == seller){
-      
+            String updatedSeller = sellerName.substring(0,31);
+
+            String creditTemp = sellerName.substring(22,31);
+            double newBalanceTemp = Double.parseDouble(sellerName.substring(22,31));
+            newBalanceTemp -= refundTemp;
+
+            String newBalance = String.valueOf(newBalanceTemp);
+            if(newBalance.length() == 9 )
+            {
+              return;
+            }
+            else if(newBalance.length() == 8)
+            {
+              newBalance = "0" + newBalance;
+            }
+            else if(newBalance.length() == 7)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 6)
+            {
+              newBalance = "000" + newBalance;
+            }
+            else if(newBalance.length() == 5)
+            {
+              newBalance = "0000" + newBalance;
+            }
+            else if(newBalance.length() == 4)
+            {
+              newBalance = "00000" + newBalance;
+            }
+            else if(newBalance.length() == 3)
+            {
+              newBalance = "000000" + newBalance;
+            }
+            else if(newBalance.length() == 2)
+            {
+              newBalance = "0000000" + newBalance;
+            }
+            else if(newBalance.length() == 1)
+            {
+              newBalance = "00000000" + newBalance;
+            }
+            else if(newBalance.length() == 0)
+            {
+              newBalance = "000000000" + newBalance;
+            }
+            accounts.remove(sellerName);
+            accounts.add(updatedSeller);
           }
         }
-        
-        String sellerCredit;
-        String buyerCredit;
   }
 
   public static void createEvent(String transaction){
