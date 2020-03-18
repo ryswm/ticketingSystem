@@ -25,6 +25,7 @@ public class Backend {
   static ArrayList<String> users = new ArrayList<String>();
   
 
+
   //------------------------ Read & Write functions
     
   public static void readFiles() throws FileNotFoundException{
@@ -93,6 +94,9 @@ public class Backend {
 
 
 
+
+
+
   //----------------- Helper functions
   
   public static void getEventNames(){
@@ -107,6 +111,10 @@ public class Backend {
     }
   }
 //----------------------
+
+
+
+
 
 
 
@@ -212,7 +220,14 @@ public class Backend {
   public static void addCredit(String transaction){
 
   }
+
   //------------------------------
+
+
+
+
+
+
 
 
 
