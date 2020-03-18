@@ -153,8 +153,50 @@ public class Backend {
             String creditTemp = updatedBuyer.substring(22,31);
             int newBalanceTemp = Integer.parseInt(updatedBuyer.substring(22,31));
             newBalanceTemp += refundTemp;
-            
             String newBalance = String.valueOf(newBalanceTemp);
+
+            if(newBalance.length() == 9 )
+            {
+              return;
+            }
+            else if(newBalance.length() == 8)
+            {
+              newBalance = "0" + newBalance;
+            }
+            else if(newBalance.length() == 7)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 6)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 5)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 4)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 3)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 2)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 1)
+            {
+              newBalance = "00" + newBalance;
+            }
+            else if(newBalance.length() == 0)
+            {
+              newBalance = "000000000" + newBalance;
+            }
+
+
             updatedBuyer.substring(22,31).replace(creditTemp, newBalance);
             accounts.remove(buyerName);
             accounts.add(updatedBuyer);
