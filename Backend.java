@@ -136,15 +136,39 @@ public class Backend {
   }
     
   public static void deleteUser(String transaction){
-              String username = transaction.substring(3, 18).trim();
+              String username = transaction.substring(3, 31).trim();
               accounts.remove(username);
   }
 
   public static void refundUser(String transaction){
         String buyer = transaction.substring(3, 18).trim();
         String seller = transaction.substring(19,34).trim();
-        String refundCredit = transaction.substring(35,44).trim();
+        String refund = transaction.substring(35,44).trim();
+        int refundTemp = Integer.parseInt(transaction.substring(35,44).trim());
         //find matching buyer / seller in accounts file and update the credit
+
+
+        for(String buyerName : accounts){
+          if(buyerName.substring(3,18) == buyer){
+            String updatedBuyer = buyerName.substring(0,31);
+
+            String creditTemp = updatedBuyer.substring(22,31);
+            int newBalanceTemp = Integer.parseInt(updatedBuyer.substring(22,31));
+            newBalanceTemp += refundTemp;
+            
+            String newBalance = String.valueOf(newBalanceTemp);
+            updatedBuyer.substring(22,31).replace(creditTemp, newBalance);
+            accounts.remove(buyerName);
+            accounts.add(updatedBuyer);
+          }
+        }
+
+        for(String sellerName : accounts){
+          if(sellerName.substring(3,18) == seller){
+      
+          }
+        }
+        
         String sellerCredit;
         String buyerCredit;
   }
