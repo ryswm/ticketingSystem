@@ -152,10 +152,7 @@ public class Backend {
   public static void refundUser(String transaction){
         String buyer = transaction.substring(3, 18).trim();
         String seller = transaction.substring(19,34).trim();
-        String refund = transaction.substring(35,44).trim();
         int refundTemp = Integer.parseInt(transaction.substring(35,44).trim());
-        //find matching buyer / seller in accounts file and update the credit
-
 
         for(String buyerName : accounts){
           if(buyerName.substring(3,18) == buyer){
