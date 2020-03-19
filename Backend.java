@@ -1,3 +1,17 @@
+/*
+
+This acts as the backend for the tix selling system.
+Inputs are daily transaction file, event file, and accounts file
+Outputs are new account file, and new event file.
+
+meant to be run from command line:
+
+javac Backend.java
+java Backend
+
+*/
+
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
