@@ -120,6 +120,8 @@ public class Backend {
 
 
 //---------------------- Transaction functions
+
+//TODO check for existing user before adding
   public static void createUser(String transaction) throws FileNotFoundException{
     // split up the transaction string into substrings by whitespace
     String[] split = transaction.split("\\s+");
@@ -215,6 +217,7 @@ public class Backend {
     System.out.println(tickets);
   } //Create a new event (Sell)
 
+  //TODO complete and constraint error
   public static void buyTicket(String transaction)
   {
     String eventName = transaction.substring(3,21).trim();
@@ -259,9 +262,6 @@ public class Backend {
 
 
 
-
-
-
   //------------------------------  Main function
   public static void main(String[] args) throws FileNotFoundException {
     int currentUser = 0; //First user is the first user in sessionUser
@@ -275,8 +275,7 @@ public class Backend {
         sessionUsers.add(username);
       }
     }
-
-    //TODO handle all transactions from daily transactions file (fill out methods)  
+ 
     for (String transaction : transactions) {
       if(transaction.startsWith("01")){
 			  createUser(transaction);
@@ -295,10 +294,10 @@ public class Backend {
       }
       else if(transaction.startsWith("06")){
         addCredit(transaction);
-      }
+      }/*
       else if(transaction.startsWith("00")){
         currentUser++; //Once user logsout, update current user (index of sessionUser)
-      }
+      }*/
     }
 
     //TODO write 2 output files (new events + new accounts; fill out method)
