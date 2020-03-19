@@ -85,9 +85,35 @@ public class Backend {
   } //Read 3 input files, use helper functions
 
 
-
+  //TODO change terminal output for fatal error
   public static void writeFiles(){
+    try{
+      FileWriter newAccounts = new FileWriter("newAccounts.txt");
+      FileWriter newEvents = new FileWriter("newEvents.txt");
 
+      //Write new accounts file
+      for(String a : accounts){
+        newAccounts.write(a);
+        if(accounts.indexOf(a) != accounts.size() - 1){
+          newAccounts.write("\n");
+        }
+      }
+
+      //Write new event files
+      for(String e : tickets){
+        newEvents.write(e);
+        if(tickets.indexOf(e) != tickets.size() - 1){
+          newEvents.write("\n");
+        }
+      }
+
+      //Close FileWriters
+      newAccounts.close();
+      newEvents.close();
+
+    } catch(Exception e){
+      System.out.println(e);
+    }
   }
 
   //-----------------
@@ -220,6 +246,7 @@ public class Backend {
   //TODO complete and constraint error
   public static void buyTicket(String transaction)
   {
+    /*
     String eventName = transaction.substring(3,21).trim();
     String sellerName = transaction.substring(22,36).trim();
     int ticketQuantity = Integer.parseInt(transaction.substring(36,40).trim());
@@ -249,7 +276,7 @@ public class Backend {
 
     }
     
-
+    */
   } //Buy tickets
 
   public static void addCredit(String transaction){
