@@ -194,7 +194,7 @@ public class Backend {
     String eventName = transaction.substring(3,21).trim();
     String sellerName = transaction.substring(22,37).trim();
     String tixQuantity = transaction.substring(38,41);
-    String tixPrice = transaction.substring(42,48);
+    String tixPrice = transaction.substring(42,46);
 
     //Check for duplicates
     for(String e : eventNames){
@@ -221,7 +221,35 @@ public class Backend {
   public static void buyTicket(String transaction)
   {
     String eventName = transaction.substring(3,21).trim();
-    String sellerName;
+    String sellerName = transaction.substring(22,36).trim();
+    int ticketQuantity = Integer.parseInt(transaction.substring(36,40).trim());
+    double price = Double.parseDouble(transaction.substring(40,46).trim());
+    // Have to take money out of users account then change tickets remainin
+    double total = price * ticketQuantity;
+    int accountIndex;
+    int eventIndex;
+    // Updating seller account with the right amount of credit
+    for(String account : accounts){
+      if(sellerName == account){
+        accountIndex = accounts.indexOf(account);
+        // Going to split up the account string to update the amount of credit, then update accounts with the rebuilt version
+        String accountName = account.substring(0, 17);
+        double accountsCredit = Double.parseDouble(account.substring(18,27)) + total;
+        accounts.set(index, accountName + accountsCredit);
+      }
+    }
+    for(String event : eventNames){
+      if(event == eventName){
+        eventIndex = eventNames.indexOf(event);
+        String nameAndSeller = event.substring(0,33);
+        int quantity = Integer.parseInt(event.substring(33, 36)) - ticketQuantity;
+        double eventPrice = Double.parseDouble(event.substring(37,43));
+        eventNames.set(index, nameAndSeller + quantity + eventPrice);
+      }
+
+    }
+    
+
   } //Buy tickets
 
   public static void addCredit(String transaction){
@@ -267,7 +295,7 @@ public class Backend {
     int currentUser = 0; //First user is the first user in sessionUser
 
     readFiles();  //Read the 3 input files
-
+    
     //Find all logouts, make list of users from the day
     for (String transaction : transactions){
       if(transaction.startsWith("00")){
