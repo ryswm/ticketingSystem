@@ -1,5 +1,9 @@
 /*
 
+Jonathan Bajada 500798771
+Ryan Woodworth 500752821
+Manuel Oshana   500699021
+
 This acts as the backend for the tix selling system.
 Inputs are daily transaction file, event file, and accounts file
 Outputs are new account file, and new event file.
