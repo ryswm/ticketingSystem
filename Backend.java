@@ -235,7 +235,7 @@ public class Backend {
         // Going to split up the account string to update the amount of credit, then update accounts with the rebuilt version
         String accountName = account.substring(0, 17);
         double accountsCredit = Double.parseDouble(account.substring(18,27)) + total;
-        accounts.set(index, accountName + accountsCredit);
+        accounts.set(accountIndex, accountName + accountsCredit);
       }
     }
     for(String event : eventNames){
@@ -244,7 +244,7 @@ public class Backend {
         String nameAndSeller = event.substring(0,33);
         int quantity = Integer.parseInt(event.substring(33, 36)) - ticketQuantity;
         double eventPrice = Double.parseDouble(event.substring(37,43));
-        eventNames.set(index, nameAndSeller + quantity + eventPrice);
+        eventNames.set(eventIndex, nameAndSeller + quantity + eventPrice);
       }
 
     }
