@@ -82,7 +82,7 @@ public class Backend {
     //Get event and user names
     getEventNames();
     getAccountNames();
-  } 
+  } //Read 3 input files, use helper functions
 
 
 
@@ -103,13 +103,13 @@ public class Backend {
     for(String event : tickets){
       eventNames.add(event.substring(0, 18).trim());
     }
-  }
+  } //Get all existing event names
 
   public static void getAccountNames(){
     for(String account : accounts){
       users.add(account.substring(0,15).trim());
     }
-  }
+  } //Get all names of existing users
 //----------------------
 
 
@@ -137,46 +137,54 @@ public class Backend {
     System.out.println(account);
     accounts.add(account);
     System.out.println(accounts);
-  }
+  } // Create new user
     
   public static void deleteUser(String transaction){
               String username = transaction.substring(3, 31).trim();
               accounts.remove(username);
-  }
+  } //Delete user
 
   public static void refundUser(String transaction){
         String buyer = transaction.substring(3, 18).trim();
         String seller = transaction.substring(19,34).trim();
         double refundTemp = Double.parseDouble(transaction.substring(35,44).trim());
 
+        //Update buyers credit
         for(String buyerName : accounts){
-          if(buyerName.substring(0,15).trim().equals(buyer)){
-            int index = accounts.indexOf(buyerName);
+          if(buyerName.substring(0,15).trim().equals(buyer)){ //Find correct buyer account
+            int index = accounts.indexOf(buyerName);  //Get index of account
 
+            //Get user credit and apply changes
             Double creditTemp = Double.parseDouble(buyerName.substring(20,28).trim());
-
             creditTemp += refundTemp;
+
+            //Formate new credit for update
             String newBalance = String.format("%.2f",creditTemp);
             newBalance = String.format("%9s", newBalance).replace(" ", "0");
             
+            //Update user account
             accounts.set(index, buyerName.substring(0, 19) + newBalance);
           }
         }
 
+        //Update sellers credit
         for(String sellerName : accounts){
-          if(sellerName.substring(0,15).trim().equals(seller)){
-            int index = accounts.indexOf(sellerName);
+          if(sellerName.substring(0,15).trim().equals(seller)){  //Find correct seller account
+            int index = accounts.indexOf(sellerName); //Get index of account
 
+            //Get user credit and apply changes
             Double creditTemp = Double.parseDouble(sellerName.substring(20,28).trim());
-
             creditTemp -= refundTemp;
+
+            //Format new credit for update
             String newBalance = String.format("%.2f",creditTemp);
             newBalance = String.format("%9s", newBalance).replace(" ", "0");
             
+            //Update user account
             accounts.set(index, sellerName.substring(0, 19) + newBalance);
           }
         }
-  }
+  } //Refund user
 
   public static void createEvent(String transaction){
     Boolean add = true;
@@ -205,13 +213,13 @@ public class Backend {
       tickets.add(0,newEvent);  //Add to list of events
     }
     System.out.println(tickets);
-  }
+  } //Create a new event (Sell)
 
   public static void buyTicket(String transaction)
   {
     String eventName = transaction.substring(3,21).trim();
     String sellerName;
-  }
+  } //Buy tickets
 
   public static void addCredit(String transaction){
     // Split up the transaction string into substrings by whitespace
@@ -241,7 +249,7 @@ public class Backend {
 
     }
 
-  }
+  } // Add user credit
 
   //------------------------------
 
