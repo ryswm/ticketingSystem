@@ -1,3 +1,17 @@
+/*
+
+This acts as the backend for the tix selling system.
+Inputs are daily transaction file, event file, and accounts file
+Outputs are new account file, and new event file.
+
+meant to be run from command line:
+
+javac Backend.java
+java Backend
+
+*/
+
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -167,6 +181,7 @@ public class Backend {
     System.out.println(accounts);
   } // Create new user
     
+  //TODO delete all events associated with user
   public static void deleteUser(String transaction){
               String username = transaction.substring(3, 31).trim();
               accounts.remove(username);
@@ -220,7 +235,7 @@ public class Backend {
     String eventName = transaction.substring(3,21).trim();
     String sellerName = transaction.substring(22,37).trim();
     String tixQuantity = transaction.substring(38,41);
-    String tixPrice = transaction.substring(42,46);
+    String tixPrice = transaction.substring(42,48);
 
     //Check for duplicates
     for(String e : eventNames){
@@ -240,7 +255,6 @@ public class Backend {
 
       tickets.add(0,newEvent);  //Add to list of events
     }
-    System.out.println(tickets);
   } //Create a new event (Sell)
 
   //TODO complete and constraint error
@@ -357,6 +371,8 @@ public class Backend {
 
     //TODO write 2 output files (new events + new accounts; fill out method)
     writeFiles();
-
   }
+
+
+  
 }
