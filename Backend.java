@@ -246,7 +246,7 @@ public class Backend {
   //TODO complete and constraint error
   public static void buyTicket(String transaction)
   {
-    /*
+    
     String eventName = transaction.substring(3,21).trim();
     String sellerName = transaction.substring(22,36).trim();
     int ticketQuantity = Integer.parseInt(transaction.substring(36,40).trim());
@@ -276,7 +276,7 @@ public class Backend {
 
     }
     
-    */
+    
   } //Buy tickets
 
   public static void addCredit(String transaction){
