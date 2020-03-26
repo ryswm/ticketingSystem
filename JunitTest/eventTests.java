@@ -3,11 +3,11 @@ import org.junit.Test;
 
 
 
-public class transactionsTest {
+public class eventTests {
 
 
     @Test
-    public void shouldReadFiles(){
+    public void shouldGetEventName(){
 
         static ArrayList<String> tickets = new ArrayList<String>();
         String event = "billy idol         admin           100 001.00";
