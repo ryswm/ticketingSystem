@@ -4,4 +4,4 @@
 *.adt
 *.resterm
 *.restran
-*.DS_Store
+.DS_Store
