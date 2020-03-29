@@ -2,16 +2,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertTrue;
 
 
-public class eventTests extends Backend{
+public class eventTests{
 
+    Backend backend = new Backend();
 
     @Test
     public void shouldGetEventName(){
         String name = "billy idol         admin           100 001.00";
         String nameTrue = "billy idol";
-        tickets.add(name);
-        Backend.getEventNames();
-        assertTrue(Backend.eventNames.contains(nameTrue));
+        backend.tickets.add(name);
+        backend.getEventNames();
+        assertTrue(backend.eventNames.contains(nameTrue));
     }
 
 
